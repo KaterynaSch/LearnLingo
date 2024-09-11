@@ -1,13 +1,24 @@
 {
   "files": {
-    "main.css": "/LearnLingo/static/css/main.7acaea2f.css",
-    "main.js": "/LearnLingo/static/js/main.43079260.js",
+    "main.css": "/LearnLingo/static/css/main.ca32c4f4.css",
+    "main.js": "/LearnLingo/static/js/main.ecb9e900.js",
+    "static/js/441.d032f1f9.chunk.js": "/LearnLingo/static/js/441.d032f1f9.chunk.js",
+    "static/js/455.ee54e968.chunk.js": "/LearnLingo/static/js/455.ee54e968.chunk.js",
+    "static/js/395.1fc02537.chunk.js": "/LearnLingo/static/js/395.1fc02537.chunk.js",
+    "static/media/block_result.png": "/LearnLingo/static/media/block_result.6175a1ee360f9759f8ae.png",
+    "static/media/roboto-v30-latin-500.woff2": "/LearnLingo/static/media/roboto-v30-latin-500.f25d774ecfe0996f8eb5.woff2",
+    "static/media/roboto-v30-latin-700.woff2": "/LearnLingo/static/media/roboto-v30-latin-700.227c93190fe7f82de3f8.woff2",
+    "static/media/roboto-v30-latin-regular.woff2": "/LearnLingo/static/media/roboto-v30-latin-regular.b009a76ad6afe4ebd301.woff2",
+    "static/media/icons.svg": "/LearnLingo/static/media/icons.8ddf350bb6bca193812f4c4a495547eb.svg",
     "index.html": "/LearnLingo/index.html",
-    "main.7acaea2f.css.map": "/LearnLingo/static/css/main.7acaea2f.css.map",
-    "main.43079260.js.map": "/LearnLingo/static/js/main.43079260.js.map"
+    "main.ca32c4f4.css.map": "/LearnLingo/static/css/main.ca32c4f4.css.map",
+    "main.ecb9e900.js.map": "/LearnLingo/static/js/main.ecb9e900.js.map",
+    "441.d032f1f9.chunk.js.map": "/LearnLingo/static/js/441.d032f1f9.chunk.js.map",
+    "455.ee54e968.chunk.js.map": "/LearnLingo/static/js/455.ee54e968.chunk.js.map",
+    "395.1fc02537.chunk.js.map": "/LearnLingo/static/js/395.1fc02537.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.43079260.js"
+    "static/css/main.ca32c4f4.css",
+    "static/js/main.ecb9e900.js"
   ]
 }
