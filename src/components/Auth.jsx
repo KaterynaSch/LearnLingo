@@ -64,7 +64,6 @@ export const Auth = () => {
         isOpen={isSignInModalOpen}
         onRequestClose={closeSignInModal}
         style={customStyles}
-        // className="top-1/2 left-1/2 right-auto bottom-auto transform -translate-x-[-1/2] -translate-y-[-1/2] p-4 md:p-8 lg:p-16"
       >
         <SignInModal onClose={closeSignInModal} />
       </Modal>
@@ -72,7 +71,6 @@ export const Auth = () => {
         isOpen={isRegisterModalOpen}
         onRequestClose={closeRegisterModal}
         style={customStyles}
-        // className="top-1/2 left-1/2 right-auto bottom-auto transform -translate-x-[-1/2] -translate-y-[-1/2] p-4 md:p-8 lg:p-16"
       >
         <RegisterModal onClose={closeRegisterModal} />
       </Modal>
