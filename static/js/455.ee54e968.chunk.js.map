@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/455.ee54e968.chunk.js","mappings":"wKAAe,SAASA,IACpB,OACIC,EAAAA,EAAAA,KAAA,OAAAC,SAAK,YAEb,C","sources":["pages/Teachers.jsx"],"sourcesContent":["export default function Teachers() {\n    return(\n        <div>Teachers</div>\n    )\n}"],"names":["Teachers","_jsx","children"],"sourceRoot":""}
