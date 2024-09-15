@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 const StyledLink = ({ to, children }) => {
   return (
@@ -13,6 +14,10 @@ const StyledLink = ({ to, children }) => {
 };
 
 export default function Navigation() {
+  const [
+    isLogin,
+    // setIsLogin
+  ] = useState(false);
   return (
     <nav className=" hidden lg:flex items-center justify-center">
       <ul className="flex flex-col gap-1 md:flex-row md:gap-2 items-center justify-center ">
@@ -22,9 +27,11 @@ export default function Navigation() {
         <li>
           <StyledLink to="/teachers">Teachers</StyledLink>
         </li>
-        <li>
-          <StyledLink to="/favorites">Favorites</StyledLink>
-        </li>
+        {isLogin && (
+          <li>
+            <StyledLink to="/favorites">Favorites</StyledLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

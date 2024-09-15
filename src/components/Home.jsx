@@ -15,7 +15,7 @@ export const Home = () => {
           <h1 className="text-text text-2xl md:text-4xl lg:text-5xl/[56px] font-medium tracking-[-0.96px] mb-4 md:mb-6 lg:mb-8">
             Unlock your potential with the best{' '}
             <span className="bg-background italic leading-[56px] rounded-xl">
-              language{' '}
+              language
             </span>{' '}
             tutors
           </h1>
@@ -24,13 +24,12 @@ export const Home = () => {
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </p>
-
-          <button
-            type="button"
-            className=" w-full md:w-[267px] text-sm lg:text-lg font-bold text-text bg-accent hover:bg-#FFDC86 py-4 rounded-xl "
+          <Link
+            to="/teachers"
+            className="block text-center w-full md:w-[267px] text-sm lg:text-lg font-bold text-text bg-accent hover:bg-accentLight py-4 rounded-xl "
           >
-            <Link to="/teachers">Get started</Link>
-          </button>
+            Get started
+          </Link>
         </div>
         <div className=" rounded-[30px]  w-full h-auto  lg:w-[568px] lg:h-[530px]">
           <img className="w-full h-full " src={heroIMG} alt="hero-img" />
