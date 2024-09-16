@@ -1,5 +1,4 @@
-export default function Teachers() {
-    return(
-        <div>Teachers</div>
-    )
+import Teachers from '../components/Teachers';
+export default function TeachersPage() {
+  return <Teachers />;
 }

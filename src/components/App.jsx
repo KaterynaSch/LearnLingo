@@ -4,12 +4,12 @@ import { Layout } from './Layout';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const TeachersPage = lazy(() => import('../pages/Teachers'));
-const FavoritesPage = lazy(() => import('../pages/Favorites'));
+const FavoritesPage = lazy(() => import('../pages/Favorite'));
 
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="/teachers" element={<TeachersPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
