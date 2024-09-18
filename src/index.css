@@ -2,59 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-  font-display: swap; 
+  font-display: swap;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/roboto-v30-latin-regular.woff2') format('woff2'); 
+  src: url('./fonts/roboto-v30-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-display: swap; 
+  font-display: swap;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: url('./fonts/roboto-v30-latin-500.woff2') format('woff2'); 
+  src: url('./fonts/roboto-v30-latin-500.woff2') format('woff2');
 }
 
 @font-face {
-  font-display: swap; 
+  font-display: swap;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: url('./fonts/roboto-v30-latin-700.woff2') format('woff2'); 
+  src: url('./fonts/roboto-v30-latin-700.woff2') format('woff2');
 }
-
-/* body {  
-  font-family: 'Roboto', sans-serif;  
-} */
-
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
-/* 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
- {
-  margin: 0;
-} */
-
-/* ul {
-  margin: 0;
-  padding: 0; 
-  list-style: none;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  
-} */

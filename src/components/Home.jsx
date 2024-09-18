@@ -9,7 +9,7 @@ const benefits = [
 
 export const Home = () => {
   return (
-    <>
+    <div className=" container pb-8">
       <div className=" flex flex-col lg:flex-row justify-center items-center gap-2 md:gap-4 lg:gap-6 mb-2 md:mb-4 lg:mb-6 ">
         <div className="bg-grayBGN rounded-[30px] py-6 md:py-12 lg:py-24 px-4 md:px-8 lg:px-16 w-full h-auto lg:w-[720px] lg:h-[530px] ">
           <h1 className="text-text text-2xl md:text-4xl lg:text-5xl/[56px] font-medium tracking-[-0.96px] mb-4 md:mb-6 lg:mb-8">
@@ -31,7 +31,7 @@ export const Home = () => {
             Get started
           </Link>
         </div>
-        <div className=" rounded-[30px]  w-full h-auto  lg:w-[568px] lg:h-[530px]">
+        <div className=" rounded-[30px] w-full  md:w-[704px] md:h-[658px]   lg:w-[568px] lg:h-[530px]">
           <img className="w-full h-full " src={heroIMG} alt="hero-img" />
         </div>
       </div>
@@ -52,6 +52,6 @@ export const Home = () => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };

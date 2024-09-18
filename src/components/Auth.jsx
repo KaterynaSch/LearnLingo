@@ -52,13 +52,17 @@ export const Auth = () => {
           {isLogin ? 'Log out' : 'Log in'}
         </span>
       </button>
-      <button
-        type="button"
-        className="text-base/[1.2] font-bold text-white hover:text-accent bg-text px-5 py-2 lg:px-10 lg:py-3 rounded-xl"
-        onClick={() => setIsRegisterModalOpen(true)}
-      >
-        Registration
-      </button>
+      {isLogin ? (
+        <p>Hello, username</p>
+      ) : (
+        <button
+          type="button"
+          className="text-base/[1.2] font-bold text-white hover:text-accent bg-text px-5 py-2 lg:px-10 lg:py-3 rounded-xl"
+          onClick={() => setIsRegisterModalOpen(true)}
+        >
+          Registration
+        </button>
+      )}
 
       <Modal
         isOpen={isSignInModalOpen}

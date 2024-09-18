@@ -4,10 +4,10 @@ import { Header } from './Header';
 
 export const Layout = () => {
   return (
-    <div className=" container pt-5 pb-8 w-full h-full my-0 mx-auto">
+    <div className=" pt-5 w-full h-full my-0 mx-auto">
       <Header />
       <main>
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
       </main>
