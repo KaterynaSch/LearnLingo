@@ -7,7 +7,7 @@ export default function Teachers() {
       <TeachersList />
       <button
         type="button"
-        className="block text-center w-[184px] text-lg font-bold text-text bg-accent hover:bg-accentLight py-4 rounded-xl "
+        className="block text-center w-[184px] text-lg font-bold text-text bg-accent hover:bg-accentLight py-2 md:py-4 rounded-xl "
       >
         Load more
       </button>

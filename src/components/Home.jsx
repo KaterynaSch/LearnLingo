@@ -35,7 +35,7 @@ export const Home = () => {
           <img className="w-full h-full " src={heroIMG} alt="hero-img" />
         </div>
       </div>
-      <div className="rounded-[30px] border border-dashed border-accent w-full py-2 md:py-6 lg:py-10 ">
+      <div className="rounded-[30px] border-[1.5px] border-dashed border-accent w-full py-2 md:py-6 lg:py-10 ">
         <ul className="flex flex-col md:flex-row items-center  justify-around ">
           {benefits.map(({ value, descr }) => (
             <li

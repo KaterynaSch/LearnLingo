@@ -17,10 +17,13 @@ export const CardItem = ({
   },
 }) => {
   const [isExpanded, setExpanded] = useState(false);
-  const getOption = options => {
+  const getOption = (options, flag) => {
     return options.map((option, idx) => {
       return (
-        <span key={option} className="text-text ">
+        <span
+          key={option}
+          className={`text-text ${flag === 'languages' ? 'underline' : ''} `}
+        >
           {option}
           {idx !== options.length - 1 && ', '}
         </span>
@@ -35,9 +38,9 @@ export const CardItem = ({
   return (
     <li
       key={name + surname}
-      className=" p-1 md:p-2 lg:p-6 flex flex-row gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl w-full text-text font-medium"
+      className="relative p-2 md:p-3 lg:p-6 flex flex-col items-center lg:items-start  lg:flex-row  gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl w-full text-text font-medium "
     >
-      <div className="min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center">
+      <div className="min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center ">
         <img
           src={avatar_url}
           alt="avatar"
@@ -46,25 +49,25 @@ export const CardItem = ({
       </div>
 
       {/* BLOCKS */}
-      <div className="relative flex flex-col  gap-3 md:gap-6 lg:gap-8  w-full">
+      <div className=" flex flex-col  gap-3 md:gap-6 lg:gap-8  w-full">
         {/* First block */}
-        <div className=" flex flex-row justify-between items-start w-full">
+        <div className=" flex flex-col  lg:flex-row justify-between items-center lg:justify-between lg:items-start w-full gap-2">
           <div className="flex flex-col gap-2 ">
-            <p className="text-md  text-lightGray">Teacher</p>
+            <p className=" text-center lg:text-left text-lightGray">Teacher</p>
             <h2 className="text-2xl ">{name + ' ' + surname}</h2>
           </div>
 
-          <ul className="flex flex-row gap-4 mr-16">
-            <li className="inline-flex flex-row gap-2 items-center">
+          <ul className="flex flex-row text-sm md:text-base items-center gap-2 flex-wrap lg:gap-4 lg:mr-16">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
               <svg className="stroke-black fill-transparent size-4">
                 <use xlinkHref={`${sprite}#icon_book_open`} />
               </svg>
               <p>Lessons online</p>
             </li>
-            <li className="inline-flex flex-row gap-2 items-center">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
               <p>Lessons done: {lessons_done}</p>
             </li>
-            <li className="inline-flex flex-row gap-2 items-center">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
               <svg className="  size-4">
                 <use xlinkHref={`${sprite}#icon_star`} />
               </svg>
@@ -80,7 +83,7 @@ export const CardItem = ({
 
           <button
             type="button"
-            className="absolute flex justify-center items-center top-0 right-0"
+            className="absolute flex justify-center items-center  top-2 right-2 md:top-3 md:right-3 lg:top-6 lg:right-6"
           >
             <svg className="stroke-black fill-transparent size-[24px]">
               <use xlinkHref={`${sprite}#icon_heart`} />
@@ -89,7 +92,7 @@ export const CardItem = ({
         </div>
         {/* Second block */}
         <div className="flex flex-col items-start gap-2 text-lightGray ">
-          <p>Speaks: {getOption(languages)}</p>
+          <p>Speaks: {getOption(languages, 'languages')}</p>
           <p>
             Lesson Info: <span className="text-text">{lesson_info}</span>
           </p>
@@ -118,7 +121,6 @@ export const CardItem = ({
 
           <button
             type="button"
-            // className={`underline mt-2  ${isExpanded ? 'hidden' : 'block'}`}
             className="underline mt-2"
             onClick={toggleExpanded}
           >
@@ -126,13 +128,15 @@ export const CardItem = ({
           </button>
         </div>
         {/* Third block */}
-        <ul className="flex flex-row gap-2 text-text ">
-          {levels.map(level => {
+        <ul className="flex flex-row flex-wrap gap-2 text-text text-sm md:text-base ">
+          {levels.map((level, idx) => {
             return (
               <li key={level}>
                 <button
                   type="button"
-                  className="  rounded-[35px] border border-text/[0.2] px-3 py-2"
+                  className={` rounded-[35px] border border-text/[0.2] px-3 py-2 ${
+                    idx === 0 ? 'bg-accent' : ''
+                  }`}
                 >
                   {level}
                 </button>
@@ -144,7 +148,7 @@ export const CardItem = ({
         {isExpanded && (
           <button
             type="button"
-            className=" w-[232px] px-12 py-4 text-text bg-accent rounded-xl"
+            className=" w-full md:w-[232px] py-2 md:py-4 text-text bg-accent rounded-xl"
           >
             Book trial lesson
           </button>
