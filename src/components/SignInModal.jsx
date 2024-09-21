@@ -2,16 +2,25 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import sprite from '../images/icons.svg';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from 'firebaseConfig';
 
 const schema = yup.object({
-  email: yup.string().email('Invalid email').required('Email is required'),
+  email: yup
+    .string()
+    .email('Invalid email')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Invalid email format'
+    )
+    .required('Email is required'),
   password: yup
     .string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password is required'),
 });
 
-export const SignInModal = ({ onClose }) => {
+export const SignInModal = ({ onClose, setIsLogin }) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +29,15 @@ export const SignInModal = ({ onClose }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = ({ email, password }) => {
+    try {
+      signInWithEmailAndPassword(auth, email, password);
+      setIsLogin(true);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleShowPassword = () => {
     console.log('password showed');
@@ -70,7 +87,6 @@ export const SignInModal = ({ onClose }) => {
         <button
           className="w-full text-center text-lg font-bold bg-accent py-4 rounded-xl mt-10"
           type="submit"
-          //   onClick={onClose}
         >
           Log In
         </button>

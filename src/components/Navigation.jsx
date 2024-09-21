@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from 'firebaseConfig';
 const StyledLink = ({ to, children }) => {
   return (
     <NavLink
@@ -14,10 +16,16 @@ const StyledLink = ({ to, children }) => {
 };
 
 export default function Navigation() {
-  const [
-    isLogin,
-    // setIsLogin
-  ] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setIsAuth(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <nav className=" hidden lg:flex items-center justify-center">
       <ul className="flex flex-col gap-1 md:flex-row md:gap-2 items-center justify-center ">
@@ -27,7 +35,7 @@ export default function Navigation() {
         <li>
           <StyledLink to="/teachers">Teachers</StyledLink>
         </li>
-        {isLogin && (
+        {isAuth && (
           <li>
             <StyledLink to="/favorites">Favorites</StyledLink>
           </li>
