@@ -1,4 +1,4 @@
-import { Authorization } from './Authorization';
+import { Authorization } from './Auth/Authorization';
 import { Logo } from './Logo';
 import Navigation from './Navigation';
 

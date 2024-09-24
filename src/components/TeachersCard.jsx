@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import sprite from '../images/icons.svg';
-export const CardItem = ({
+export const TeachersCard = ({
   teacher: {
+    id,
     avatar_url,
     name,
     surname,
@@ -37,7 +38,7 @@ export const CardItem = ({
 
   return (
     <li
-      key={name + surname}
+      key={id}
       className="relative p-2 md:p-3 lg:p-6 flex flex-col items-center lg:items-start  lg:flex-row  gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl w-full text-text font-medium "
     >
       <div className="min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center ">

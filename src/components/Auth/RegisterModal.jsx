@@ -1,11 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import sprite from '../images/icons.svg';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'firebaseConfig';
+import sprite from '../../images/icons.svg';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { auth } from 'components/firebaseConfig';
 
 const schema = yup.object({
+  name: yup
+    .string()
+    .min(3, 'Name must be at least 3 characters')
+    .required('Name is required'),
   email: yup
     .string()
     .email('Invalid email')
@@ -20,7 +25,7 @@ const schema = yup.object({
     .required('Password is required'),
 });
 
-export const SignInModal = ({ onClose, setIsLogin }) => {
+export const RegisterModal = ({ onClose, setIsLogin }) => {
   const {
     register,
     handleSubmit,
@@ -29,14 +34,18 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
     resolver: yupResolver(schema),
   });
 
+  const [setError] = useState(null);
+
   const onSubmit = ({ email, password }) => {
-    try {
-      signInWithEmailAndPassword(auth, email, password);
-      setIsLogin(true);
-      onClose();
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(user => {
+        console.log(user);
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+    onClose();
   };
 
   const handleShowPassword = () => {
@@ -54,12 +63,19 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
           <use xlinkHref={`${sprite}#icon_close_btn`} />
         </svg>
       </button>
-      <h2 className=" text-[40px] font-medium mb-5">Log in</h2>
+      <h2 className=" text-[40px] font-medium mb-5">Registration</h2>
       <p className="mb-10">
-        Welcome back! Please enter your credentials to access your account and
-        continue your search for an teacher.
+        Thank you for your interest in our platform! In order to register, we
+        need some information. Please provide us with the following information
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="text-text ">
+        <input
+          {...register('name')}
+          placeholder="Name"
+          className=" w-full py-4 px-[18px] text-md  border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
+        />
+
+        {errors && <p className="text-accent  ">{errors.email?.message}</p>}
         <input
           {...register('email')}
           placeholder="Email"
@@ -88,7 +104,7 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
           className="w-full text-center text-lg font-bold bg-accent py-4 rounded-xl mt-10"
           type="submit"
         >
-          Log In
+          Sign Up
         </button>
       </form>
     </div>

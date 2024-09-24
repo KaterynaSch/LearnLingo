@@ -1,47 +1,50 @@
 import { useEffect, useState } from 'react';
-import { getMoreTeachers, getTeachers } from 'api';
+
 import { TeachersList } from './TeachersList';
+import { getTeachers, getMoreTeachers } from './api';
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [lastId, setLastId] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [setLastId] = useState(null);
+
+  const totalTeachers = 30; // Всього вчителів в базі даних
+  const hasMore = teachers.length < totalTeachers;
 
   useEffect(() => {
     const fetchTeachers = async () => {
       setIsLoading(true);
       try {
-        const teachers = await getTeachers();
-        setTeachers(teachers);
-        setLastId(Object.keys(teachers)[Object.keys(teachers).length - 1]);
-        setHasMore(Object.keys(teachers).length === 3);
-      } catch (error) {
-        console.error('Error fetching teachers:', error);
+        const result = await getTeachers();
+        setTeachers(result);
+        setLastId(result[result.length - 1].id);
+      } catch (err) {
+        throw new Error('Error fetching teachers:');
       } finally {
         setIsLoading(false);
       }
     };
     fetchTeachers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadMoreTeachers = async () => {
+    if (!teachers.length) return;
+
     setIsLoading(true);
     try {
-      const newTeachers = await getMoreTeachers(lastId);
-      setTeachers([...teachers, ...newTeachers]);
-
-      setLastId(Object.keys(newTeachers)[Object.keys(newTeachers).length - 1]);
-      setHasMore(Object.keys(newTeachers).length === 3);
-    } catch (error) {
-      console.error('Error fetching more teachers:', error);
+      const newTeachers = await getMoreTeachers();
+      setTeachers(prev => [...prev, ...newTeachers]);
+      setLastId(newTeachers[newTeachers.length - 1].id);
+    } catch (err) {
+      throw new Error('Error fetching more teachers:');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className=" pt-11 pb-4  bg-grayBGN ">
+    <div className=" pt-11 pb-4  bg-grayBGN teachers-container">
       <div>Filters</div>
       <TeachersList teachers={teachers} />
       {hasMore && (

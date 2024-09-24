@@ -26,6 +26,15 @@
   src: url('./fonts/roboto-v30-latin-700.woff2') format('woff2');
 }
 
-/* .custom-dashed-border {
-  position: relative;
-  border-radius: 30px; /* Скруглені кути */
+.teachers-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  @media screen and (min-width: 768px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  @media screen and (min-width: 1440px) {
+    padding-left: 128px;
+    padding-right: 128px;
+  }
+}

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import sprite from '../images/icons.svg';
+import sprite from '../../images/icons.svg';
+import { auth } from 'components/firebaseConfig';
 import { SignInModal } from './SignInModal';
 import { RegisterModal } from './RegisterModal';
-import { CustomModal } from './UI/CustomModal';
-import { signOut } from 'firebase/auth';
-import { auth } from 'firebaseConfig';
+import { CustomModal } from 'components/UI/CustomModal';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const AuthIcon = () => {
   return (
@@ -16,7 +16,7 @@ const AuthIcon = () => {
 };
 
 export const Authorization = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,31 +26,66 @@ export const Authorization = () => {
 
   const openSignInModal = () => {
     setModalContent(
-      <SignInModal onClose={closeModal} setIsLogin={setIsLogin} />
+      <SignInModal
+        onClose={closeModal}
+        // setIsLogin={setIsLogin}
+      />
     );
     setIsModalOpen(true);
   };
 
   const openRegisterModal = () => {
     setModalContent(
-      <RegisterModal onClose={closeModal} setIsLogin={setIsLogin} />
+      <RegisterModal
+        onClose={closeModal}
+        // setIsLogin={setIsLogin}
+      />
     );
     setIsModalOpen(true);
   };
 
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, user => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+    return () => listen();
+  }, []);
+
+  // const getCurrentUser = () => {
+  //   const user = auth.currentUser;
+  //   if (user) {
+  //     // Отримання даних про користувача
+  //     console.log('Current user:', user.uid, user.email);
+  //   } else {
+  //     // Користувач не авторизований
+  //     console.log('User is not logged in');
+  //   }
+  // };
+
   const handleLogOut = () => {
-    try {
-      signOut(auth);
-      console.log('user logged out');
-      setIsLogin(false);
-    } catch (error) {
-      console.log(error);
-    }
+    signOut(auth)
+      .then(() => {
+        console.log('user logged out');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // try {
+    //   await auth.signOut();
+    //   console.log('user logged out');
+    //   setIsLogin(false);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <div className="flex flex-row gap-1 md:gap-2 lg:gap-4 justify-center items-center">
-      {!isLogin ? (
+      {!authUser ? (
         <button
           type="button"
           className="flex flex-row gap-1 md:gap-2 justify-center items-center"
@@ -74,8 +109,8 @@ export const Authorization = () => {
         </button>
       )}
 
-      {isLogin ? (
-        <p>Hello, username</p>
+      {authUser ? (
+        <p>Hello,{authUser.email}</p>
       ) : (
         <button
           type="button"
