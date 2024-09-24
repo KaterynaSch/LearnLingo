@@ -6,9 +6,9 @@ import { getTeachers, getMoreTeachers } from './api';
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [setLastId] = useState(null);
+  const [lastId, setLastId] = useState(null);
 
-  const totalTeachers = 30; // Всього вчителів в базі даних
+  const totalTeachers = 30;
   const hasMore = teachers.length < totalTeachers;
 
   useEffect(() => {
@@ -17,9 +17,12 @@ export default function Teachers() {
       try {
         const result = await getTeachers();
         setTeachers(result);
-        setLastId(result[result.length - 1].id);
+        if (result.length > 0) {
+          const newLastId = result[result.length - 1].id;
+          setLastId(newLastId);
+        }
       } catch (err) {
-        throw new Error('Error fetching teachers:');
+        throw new Error('Error fetching teachers');
       } finally {
         setIsLoading(false);
       }
@@ -29,13 +32,16 @@ export default function Teachers() {
   }, []);
 
   const loadMoreTeachers = async () => {
-    if (!teachers.length) return;
+    if (!teachers.length || !lastId) return;
 
     setIsLoading(true);
     try {
-      const newTeachers = await getMoreTeachers();
+      const newTeachers = await getMoreTeachers(lastId);
       setTeachers(prev => [...prev, ...newTeachers]);
-      setLastId(newTeachers[newTeachers.length - 1].id);
+      if (newTeachers.length > 0) {
+        const newLastId = newTeachers[newTeachers.length - 1].id;
+        setLastId(newLastId);
+      }
     } catch (err) {
       throw new Error('Error fetching more teachers:');
     } finally {

@@ -2,36 +2,35 @@ import {
   ref,
   get,
   query,
-  orderByKey as orderByChild,
+  orderByKey,
   startAt,
   limitToFirst,
 } from 'firebase/database';
 import { db } from './firebaseConfig';
 
-const fetchTeachers = async (lastId = null, limit = 4) => {
+const fetchTeachers = async (lastId, limit = 4) => {
   const teachersRef = ref(db, 'teachers');
 
   const teachersQuery = lastId
     ? query(
         teachersRef,
-        orderByChild('id'),
+        orderByKey('id'),
         startAt(lastId),
-        limitToFirst(limit)
+        limitToFirst(limit + 1)
       )
-    : query(teachersRef, orderByChild('id'), limitToFirst(limit));
+    : query(teachersRef, orderByKey('id'), limitToFirst(limit));
 
   try {
     const snapshot = await get(teachersQuery);
     const response = [];
 
-    snapshot.forEach(child => {
-      const data = child.val();
+    snapshot.forEach(key => {
+      const data = key.val();
       response.push(data);
     });
 
-    return response;
+    return lastId ? response.slice(1) : response;
   } catch (err) {
-    console.log('Error fetching teachers:', err);
     throw err;
   }
 };
