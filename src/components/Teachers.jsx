@@ -2,11 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { TeachersList } from './TeachersList';
 import { getTeachers, getMoreTeachers } from './api';
+import { Filters } from './Filters';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastId, setLastId] = useState(null);
+  const [params] = useSearchParams();
+  const selectedLanguage = params.get('language') ?? 'all_languages';
+  const selectedLlevel = params.get('level') ?? 'a1_beginner';
+  const selectedPrice = params.get('price') ?? '';
 
   const totalTeachers = 30;
   const hasMore = teachers.length < totalTeachers;
@@ -49,10 +55,26 @@ export default function Teachers() {
     }
   };
 
+  const visibleTeachers = teachers.filter(
+    ({ languages, levels, price_per_hour }) => {
+      const hasLanguage =
+        selectedLanguage === 'all_languages' ||
+        languages.some(
+          lang =>
+            lang.toLowerCase().replace(/[\s-]+/g, '_') === selectedLanguage
+        );
+      const hasLevel = levels.some(
+        level => level.toLowerCase().replace(/[\s-]+/g, '_') === selectedLlevel
+      );
+      const hasPrice = selectedPrice === '' || price_per_hour <= selectedPrice;
+      return hasLanguage && hasLevel && hasPrice;
+    }
+  );
+
   return (
     <div className=" pt-11 pb-4  bg-grayBGN teachers-container">
-      <div>Filters</div>
-      <TeachersList teachers={teachers} />
+      <Filters />
+      <TeachersList teachers={visibleTeachers} />
       {hasMore && (
         <button
           type="button"

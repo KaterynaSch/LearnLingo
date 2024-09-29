@@ -37,10 +37,7 @@ export const TeachersCard = ({
   };
 
   return (
-    <li
-      key={id}
-      className="relative p-2 md:p-3 lg:p-6 flex flex-col items-center lg:items-start  lg:flex-row  gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl w-full text-text font-medium "
-    >
+    <div className="relative p-2 md:p-3 lg:p-6 flex flex-col items-center lg:items-start lg:flex-row gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl text-text font-medium">
       <div className="min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center ">
         <img
           src={avatar_url}
@@ -155,6 +152,6 @@ export const TeachersCard = ({
           </button>
         )}
       </div>
-    </li>
+    </div>
   );
 };
