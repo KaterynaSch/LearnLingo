@@ -25,22 +25,12 @@ export const Authorization = () => {
   };
 
   const openSignInModal = () => {
-    setModalContent(
-      <SignInModal
-        onClose={closeModal}
-        // setIsLogin={setIsLogin}
-      />
-    );
+    setModalContent(<SignInModal onClose={closeModal} />);
     setIsModalOpen(true);
   };
 
   const openRegisterModal = () => {
-    setModalContent(
-      <RegisterModal
-        onClose={closeModal}
-        // setIsLogin={setIsLogin}
-      />
-    );
+    setModalContent(<RegisterModal onClose={closeModal} />);
     setIsModalOpen(true);
   };
 
@@ -55,17 +45,6 @@ export const Authorization = () => {
     return () => listen();
   }, []);
 
-  // const getCurrentUser = () => {
-  //   const user = auth.currentUser;
-  //   if (user) {
-  //     // Отримання даних про користувача
-  //     console.log('Current user:', user.uid, user.email);
-  //   } else {
-  //     // Користувач не авторизований
-  //     console.log('User is not logged in');
-  //   }
-  // };
-
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
@@ -74,13 +53,6 @@ export const Authorization = () => {
       .catch(error => {
         console.log(error);
       });
-    // try {
-    //   await auth.signOut();
-    //   console.log('user logged out');
-    //   setIsLogin(false);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (

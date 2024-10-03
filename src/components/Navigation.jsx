@@ -29,7 +29,7 @@ export default function Navigation() {
 
   return (
     <nav className=" hidden lg:flex items-center justify-center">
-      <ul className="flex flex-col gap-1 md:flex-row md:gap-2 items-center justify-center ">
+      <ul className="flex flex-col gap-1  items-center justify-center md:flex-row md:gap-2 lg:gap-[28px]">
         <li>
           <StyledLink to="/">Home</StyledLink>
         </li>

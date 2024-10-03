@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import sprite from '../images/icons.svg';
+import { CustomModal } from './UI/CustomModal';
+import { BookingModal } from './BookingModal';
 export const TeachersCard = ({
   teacher: {
     id,
@@ -18,6 +20,7 @@ export const TeachersCard = ({
   },
 }) => {
   const [isExpanded, setExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const getOption = (options, flag) => {
     return options.map((option, idx) => {
       return (
@@ -34,6 +37,14 @@ export const TeachersCard = ({
 
   const toggleExpanded = () => {
     setExpanded(!isExpanded);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -119,7 +130,7 @@ export const TeachersCard = ({
 
           <button
             type="button"
-            className="underline mt-2"
+            className="underline mt-2 text-text"
             onClick={toggleExpanded}
           >
             {isExpanded ? 'Read less' : 'Read more'}
@@ -147,11 +158,19 @@ export const TeachersCard = ({
           <button
             type="button"
             className=" w-full md:w-[232px] py-2 md:py-4 text-text bg-accent rounded-xl"
+            onClick={openModal}
           >
             Book trial lesson
           </button>
         )}
       </div>
+      <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <BookingModal
+          avatar_url={avatar_url}
+          name={name + ' ' + surname}
+          onClose={closeModal}
+        />
+      </CustomModal>
     </div>
   );
 };

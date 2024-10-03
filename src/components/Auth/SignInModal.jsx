@@ -1,24 +1,23 @@
 import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import sprite from '../../images/icons.svg';
 import { auth } from 'components/firebaseConfig';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Button } from 'components/UI/Button';
 
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('Invalid email')
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    // .email('Invalid email')
+    .required('Email is required')
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       'Invalid email format'
-    )
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    ),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters'),
 });
 
 export const SignInModal = ({ onClose, setIsLogin }) => {
@@ -26,9 +25,7 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   const [setError] = useState(null);
   const onSubmit = async ({ email, password }) => {
@@ -37,7 +34,7 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
         console.log(user);
       })
       .catch(error => {
-        setError("Sorry, we couldin't find an account with that email");
+        setError(error.message);
       });
     onClose();
   };
@@ -57,26 +54,40 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
           <use xlinkHref={`${sprite}#icon_close_btn`} />
         </svg>
       </button>
-      <h2 className=" text-[40px] font-medium mb-5">Log in</h2>
-      <p className="mb-10">
+      <h2 className=" text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
+        Log in
+      </h2>
+      <p className="text-base/[1.37] mb-10">
         Welcome back! Please enter your credentials to access your account and
         continue your search for an teacher.
       </p>
-      <form onSubmit={handleSubmit(onSubmit)} className="text-text ">
-        <input
-          {...register('email')}
-          placeholder="Email"
-          className=" w-full py-4 px-[18px] text-md  border-[1px] border-text/[0.1] rounded-xl "
-        />
-
-        {errors && <p className="text-accent  ">{errors.email?.message}</p>}
-        <div className="relative w-full mt-[18px]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="text-text text-base/[22px]"
+      >
+        <div className="relative">
+          <input
+            {...register('email')}
+            placeholder="Email"
+            className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
+          />
+          {errors && (
+            <p className=" absolute text-accent text-xs  -bottom-0 left-2">
+              {errors.email?.message}
+            </p>
+          )}
+        </div>
+        <div className="relative">
           <input
             placeholder="Password"
             {...register('password')}
-            className="w-full py-4 px-[18px] text-md  border-[1px]  border-text/[0.1] rounded-xl "
+            className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
-          {errors && <p className="text-accent ">{errors.password?.message}</p>}
+          {errors && (
+            <p className="absolute text-accent text-xs  -bottom-0 left-2">
+              {errors.password?.message}
+            </p>
+          )}
           <button
             type="button"
             className="absolute flex justify-center items-center top-4 right-[18px]  "
@@ -87,12 +98,7 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
             </svg>
           </button>
         </div>
-        <button
-          className="w-full text-center text-lg font-bold bg-accent py-4 rounded-xl mt-10"
-          type="submit"
-        >
-          Log In
-        </button>
+        <Button text="Log In" className={'mt-[32px]'} />
       </form>
     </div>
   );

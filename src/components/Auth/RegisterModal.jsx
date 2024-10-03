@@ -1,28 +1,25 @@
 import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import sprite from '../../images/icons.svg';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from 'components/firebaseConfig';
+import { Button } from 'components/UI/Button';
 
-const schema = yup.object({
-  name: yup
-    .string()
-    .min(3, 'Name must be at least 3 characters')
-    .required('Name is required'),
-  email: yup
-    .string()
-    .email('Invalid email')
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Name is required')
+    .min(3, 'Name must be at least 3 characters'),
+  email: Yup.string()
+    .required('Email is required')
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       'Invalid email format'
-    )
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    ),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters'),
 });
 
 export const RegisterModal = ({ onClose, setIsLogin }) => {
@@ -30,9 +27,7 @@ export const RegisterModal = ({ onClose, setIsLogin }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   const [setError] = useState(null);
 
@@ -63,33 +58,52 @@ export const RegisterModal = ({ onClose, setIsLogin }) => {
           <use xlinkHref={`${sprite}#icon_close_btn`} />
         </svg>
       </button>
-      <h2 className=" text-[40px] font-medium mb-5">Registration</h2>
-      <p className="mb-10">
+      <h2 className=" text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
+        Registration
+      </h2>
+      <p className="mb-10 text-base/[22px] ">
         Thank you for your interest in our platform! In order to register, we
         need some information. Please provide us with the following information
       </p>
-      <form onSubmit={handleSubmit(onSubmit)} className="text-text ">
-        <input
-          {...register('name')}
-          placeholder="Name"
-          className=" w-full py-4 px-[18px] text-md  border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
-        />
-
-        {errors && <p className="text-accent  ">{errors.email?.message}</p>}
-        <input
-          {...register('email')}
-          placeholder="Email"
-          className=" w-full py-4 px-[18px] text-md  border-[1px] border-text/[0.1] rounded-xl "
-        />
-
-        {errors && <p className="text-accent  ">{errors.email?.message}</p>}
-        <div className="relative w-full mt-[18px]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="text-text text-base/[1.37]  "
+      >
+        <div className="relative ">
+          <input
+            {...register('name')}
+            placeholder="Name"
+            className="w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+          />
+          {errors && (
+            <p className=" absolute text-accent text-xs  -bottom-0 left-2">
+              {errors.email?.message}
+            </p>
+          )}{' '}
+        </div>
+        <div className="relative ">
+          <input
+            {...register('email')}
+            placeholder="Email"
+            className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+          />
+          {errors && (
+            <p className=" absolute text-accent text-xs  -bottom-0 left-2">
+              {errors.email?.message}
+            </p>
+          )}
+        </div>
+        <div className="relative">
           <input
             placeholder="Password"
             {...register('password')}
-            className="w-full py-4 px-[18px] text-md  border-[1px]  border-text/[0.1] rounded-xl "
+            className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
-          {errors && <p className="text-accent ">{errors.password?.message}</p>}
+          {errors && (
+            <p className=" absolute text-accent text-xs  -bottom-0 left-2">
+              {errors.password?.message}
+            </p>
+          )}
           <button
             type="button"
             className="absolute flex justify-center items-center top-4 right-[18px]  "
@@ -100,12 +114,7 @@ export const RegisterModal = ({ onClose, setIsLogin }) => {
             </svg>
           </button>
         </div>
-        <button
-          className="w-full text-center text-lg font-bold bg-accent py-4 rounded-xl mt-10"
-          type="submit"
-        >
-          Sign Up
-        </button>
+        <Button text="Sign Up" className={'mt-[32px]'} />
       </form>
     </div>
   );
