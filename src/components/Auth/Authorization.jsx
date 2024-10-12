@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import sprite from '../../images/icons.svg';
-import { auth } from 'components/firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import { SignInModal } from './SignInModal';
 import { RegisterModal } from './RegisterModal';
 import { CustomModal } from 'components/UI/CustomModal';
@@ -82,7 +82,7 @@ export const Authorization = () => {
       )}
 
       {authUser ? (
-        <p>Hello,{authUser.email}</p>
+        <p>{authUser.email}</p>
       ) : (
         <button
           type="button"

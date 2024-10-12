@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import sprite from '../../images/icons.svg';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { auth } from 'components/firebaseConfig';
 import { Button } from 'components/UI/Button';
+import { auth } from 'firebaseConfig';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()

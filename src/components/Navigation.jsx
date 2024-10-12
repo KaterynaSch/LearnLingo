@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
-import { auth } from 'components/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from 'firebaseConfig';
 const StyledLink = ({ to, children }) => {
   return (
     <NavLink

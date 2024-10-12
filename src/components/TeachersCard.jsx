@@ -2,8 +2,8 @@ import { useState } from 'react';
 import sprite from '../images/icons.svg';
 import { CustomModal } from './UI/CustomModal';
 import { BookingModal } from './BookingModal';
-export const TeachersCard = ({
-  teacher: {
+export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
+  const {
     id,
     avatar_url,
     name,
@@ -17,10 +17,10 @@ export const TeachersCard = ({
     experience,
     reviews,
     levels,
-  },
-}) => {
+  } = teacher;
   const [isExpanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const getOption = (options, flag) => {
     return options.map((option, idx) => {
       return (
@@ -93,8 +93,15 @@ export const TeachersCard = ({
           <button
             type="button"
             className="absolute flex justify-center items-center  top-2 right-2 md:top-3 md:right-3 lg:top-6 lg:right-6"
+            onClick={() => handleFavorite(id)}
           >
-            <svg className="stroke-black fill-transparent size-[24px]">
+            <svg
+              className={`  size-[24px]  ${
+                isFavorite
+                  ? 'fill-accent stroke-accent'
+                  : 'fill-transparent stroke-text'
+              }`}
+            >
               <use xlinkHref={`${sprite}#icon_heart`} />
             </svg>
           </button>
@@ -164,13 +171,15 @@ export const TeachersCard = ({
           </button>
         )}
       </div>
-      <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
-        <BookingModal
-          avatar_url={avatar_url}
-          name={name + ' ' + surname}
-          onClose={closeModal}
-        />
-      </CustomModal>
+      {isModalOpen && (
+        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+          <BookingModal
+            avatar_url={avatar_url}
+            name={name + ' ' + surname}
+            onClose={closeModal}
+          />
+        </CustomModal>
+      )}
     </div>
   );
 };

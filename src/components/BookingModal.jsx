@@ -108,7 +108,7 @@ export const BookingModal = ({ onClose, avatar_url, name }) => {
               {...register('reason')}
               className="radio-input"
             />
-            <span class="radio-indicator"></span>
+            <span className="radio-indicator"></span>
             Exams and coursework
           </label>
           <label className="flex items-center">

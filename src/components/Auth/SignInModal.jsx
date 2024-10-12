@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import sprite from '../../images/icons.svg';
-import { auth } from 'components/firebaseConfig';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button } from 'components/UI/Button';
+import { auth } from 'firebaseConfig';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
