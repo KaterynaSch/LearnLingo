@@ -25,13 +25,17 @@ export const Authorization = () => {
   };
 
   const openSignInModal = () => {
-    setModalContent(<SignInModal onClose={closeModal} />);
-    setIsModalOpen(true);
+    if (!isModalOpen) {
+      setModalContent(<SignInModal onClose={closeModal} />);
+      setIsModalOpen(true);
+    }
   };
 
   const openRegisterModal = () => {
-    setModalContent(<RegisterModal onClose={closeModal} />);
-    setIsModalOpen(true);
+    if (!isModalOpen) {
+      setModalContent(<RegisterModal onClose={closeModal} />);
+      setIsModalOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -56,7 +60,7 @@ export const Authorization = () => {
   };
 
   return (
-    <div className="flex flex-row gap-1 md:gap-2 lg:gap-4 justify-center items-center">
+    <div className="flex flex-col mt-auto gap-4 items-start md:gap-4 lg:flex-row  lg:gap-4 lg:justify-center lg:items-center">
       {!authUser ? (
         <button
           type="button"
@@ -64,9 +68,7 @@ export const Authorization = () => {
           onClick={openSignInModal}
         >
           <AuthIcon />
-          <span className="hidden md:block text-base/[1.2] font-bold ">
-            Log in
-          </span>
+          <span className=" text-base/[1.2] font-bold ">Log in</span>
         </button>
       ) : (
         <button
@@ -75,14 +77,12 @@ export const Authorization = () => {
           onClick={handleLogOut}
         >
           <AuthIcon />
-          <span className="hidden md:block text-base/[1.2] font-bold ">
-            Log out
-          </span>
+          <span className=" text-base/[1.2] font-bold ">Log out</span>
         </button>
       )}
 
       {authUser ? (
-        <p>{authUser.email}</p>
+        <p className="hidden lg:block">{authUser.email}</p>
       ) : (
         <button
           type="button"
@@ -92,10 +92,11 @@ export const Authorization = () => {
           Registration
         </button>
       )}
-
-      <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
-        {modalContent}
-      </CustomModal>
+      {isModalOpen && (
+        <CustomModal isOpen={isModalOpen} onClose={closeModal}>
+          {modalContent}
+        </CustomModal>
+      )}
     </div>
   );
 };

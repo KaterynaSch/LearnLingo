@@ -15,7 +15,7 @@ const StyledLink = ({ to, children }) => {
   );
 };
 
-export default function Navigation() {
+export default function Navigation({ onClose }) {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
@@ -27,16 +27,16 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className=" hidden lg:flex items-center justify-center">
-      <ul className="flex flex-col gap-1  items-center justify-center md:flex-row md:gap-2 lg:gap-[28px]">
-        <li>
+    <nav className=" flex lg:items-center lg:justify-center">
+      <ul className="items-start flex flex-col gap-2 lg:flex-row  lg:items-center justify-center md:gap-4 lg:gap-[28px]">
+        <li onClick={onClose}>
           <StyledLink to="/">Home</StyledLink>
         </li>
-        <li>
+        <li onClick={onClose}>
           <StyledLink to="/teachers">Teachers</StyledLink>
         </li>
         {isAuth && (
-          <li>
+          <li onClick={onClose}>
             <StyledLink to="/favorites">Favorites</StyledLink>
           </li>
         )}

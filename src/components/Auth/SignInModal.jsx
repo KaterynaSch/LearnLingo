@@ -9,7 +9,6 @@ import { auth } from 'firebaseConfig';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    // .email('Invalid email')
     .required('Email is required')
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -20,7 +19,7 @@ const validationSchema = Yup.object().shape({
     .min(6, 'Password must be at least 6 characters'),
 });
 
-export const SignInModal = ({ onClose, setIsLogin }) => {
+export const SignInModal = ({ onClose }) => {
   const {
     register,
     handleSubmit,
@@ -44,20 +43,20 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
   };
 
   return (
-    <div className="relative text-text w-[566px] p-4 md:p-8 lg:p-16">
+    <div className="relative text-text w-[300px] md:w-[566px] p-5 md:p-8 lg:p-16">
       <button
         type="button"
-        className="absolute flex justify-center items-center top-5 right-5"
+        className="absolute flex justify-center items-center top-4 right-4 md:top-5 md:right-5"
         onClick={onClose}
       >
-        <svg className="stroke-text fill-transparent size-8">
+        <svg className="stroke-text fill-transparent size-6 md:size-8">
           <use xlinkHref={`${sprite}#icon_close_btn`} />
         </svg>
       </button>
-      <h2 className=" text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
+      <h2 className=" text-[24px] md:text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
         Log in
       </h2>
-      <p className="text-base/[1.37] mb-10">
+      <p className="text-base/[1.37] mb-7 md:mb-10">
         Welcome back! Please enter your credentials to access your account and
         continue your search for an teacher.
       </p>
@@ -98,7 +97,7 @@ export const SignInModal = ({ onClose, setIsLogin }) => {
             </svg>
           </button>
         </div>
-        <Button text="Log In" className={'mt-[32px]'} />
+        <Button text="Log In" className={'mt-[10px] md:mt-[32px]'} />
       </form>
     </div>
   );

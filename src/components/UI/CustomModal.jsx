@@ -21,7 +21,12 @@ const customStyles = {
 
 export const CustomModal = ({ children, isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      style={customStyles}
+      preventScroll={true}
+    >
       {children}
     </Modal>
   );

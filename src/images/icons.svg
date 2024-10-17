@@ -49,5 +49,17 @@
             <path fill="#12141733" style="fill:var(--color1, #fff)"
                 d="M16 8a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" />
         </symbol>
+        <symbol id="burger" viewBox="0 0 32 32">
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
+                stroke-width="2" d="M28 13.333h-24">
+            </path>
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
+                stroke-width="2" d="M28 8h-24"></path>
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
+                stroke-width="2" d="M28 18.667h-24">
+            </path>
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
+                stroke-width="2" d="M28 24h-24"></path>
+        </symbol>
     </defs>
 </svg>

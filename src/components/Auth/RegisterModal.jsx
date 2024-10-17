@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
     .min(6, 'Password must be at least 6 characters'),
 });
 
-export const RegisterModal = ({ onClose, setIsLogin }) => {
+export const RegisterModal = ({ onClose }) => {
   const {
     register,
     handleSubmit,
@@ -48,20 +48,20 @@ export const RegisterModal = ({ onClose, setIsLogin }) => {
   };
 
   return (
-    <div className="relative text-text w-[566px] p-4 md:p-8 lg:p-16">
+    <div className="relative text-text w-[300px] md:w-[566px] p-5 md:p-8 lg:p-16">
       <button
         type="button"
-        className="absolute flex justify-center items-center top-5 right-5"
+        className="absolute flex justify-center items-center top-4 right-4 md:top-5 md:right-5"
         onClick={onClose}
       >
-        <svg className="stroke-text fill-transparent size-8">
+        <svg className="stroke-text fill-transparent size-6 md:size-8">
           <use xlinkHref={`${sprite}#icon_close_btn`} />
         </svg>
       </button>
-      <h2 className=" text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
+      <h2 className="text-[24px] md:text-[40px]/[1.2] tracking-[-0.8px] font-medium mb-5">
         Registration
       </h2>
-      <p className="mb-10 text-base/[22px] ">
+      <p className="mb-7 md:mb-10 text-base/[22px] ">
         Thank you for your interest in our platform! In order to register, we
         need some information. Please provide us with the following information
       </p>
@@ -114,7 +114,7 @@ export const RegisterModal = ({ onClose, setIsLogin }) => {
             </svg>
           </button>
         </div>
-        <Button text="Sign Up" className={'mt-[32px]'} />
+        <Button text="Sign Up" className={'mt-[10px] md:mt-[32px]'} />
       </form>
     </div>
   );

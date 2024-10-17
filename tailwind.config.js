@@ -56,3 +56,39 @@ export const theme = {
     },
   },
 };
+
+export const plugins = [
+  function ({ addComponents }) {
+    addComponents({
+      '.teachers-container': {
+        width: '100%',
+        paddingLeft: '10px',
+        paddingRight: '10px',
+        '@screen md': {
+          paddingLeft: '32px',
+          paddingRight: '32px',
+        },
+        '@screen lg': {
+          paddingLeft: '128px',
+          paddingRight: '128px',
+        },
+      },
+      '.radio-input': {
+        display: 'none',
+      },
+      '.radio-indicator': {
+        marginRight: '8px',
+        width: '20px',
+        height: '20px',
+        border: '2px solid rgba(4, 4, 5, 0.2)',
+        borderRadius: '50%',
+        backgroundColor: '#fff',
+      },
+      '.radio-input:checked + .radio-indicator': {
+        backgroundColor: '#f4c550',
+        borderColor: '#f4c550',
+        boxShadow: 'inset 0 0 0 3px #ffffff',
+      },
+    });
+  },
+];

@@ -40,6 +40,7 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
   };
 
   const openModal = () => {
+    if (isModalOpen) return;
     setIsModalOpen(true);
   };
 
@@ -172,7 +173,7 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
         )}
       </div>
       {isModalOpen && (
-        <CustomModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <CustomModal isOpen={isModalOpen} onClose={closeModal}>
           <BookingModal
             avatar_url={avatar_url}
             name={name + ' ' + surname}
