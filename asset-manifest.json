@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/LearnLingo/static/css/main.94511bbe.css",
-    "main.js": "/LearnLingo/static/js/main.1216ff13.js",
-    "static/js/709.3dce8342.chunk.js": "/LearnLingo/static/js/709.3dce8342.chunk.js",
-    "static/js/150.7e38ec9c.chunk.js": "/LearnLingo/static/js/150.7e38ec9c.chunk.js",
-    "static/js/987.d446b425.chunk.js": "/LearnLingo/static/js/987.d446b425.chunk.js",
+    "main.css": "/LearnLingo/static/css/main.e056c1c3.css",
+    "main.js": "/LearnLingo/static/js/main.69e42a30.js",
+    "static/js/398.e6b16437.chunk.js": "/LearnLingo/static/js/398.e6b16437.chunk.js",
+    "static/js/150.0c771ae0.chunk.js": "/LearnLingo/static/js/150.0c771ae0.chunk.js",
+    "static/js/987.368a53fa.chunk.js": "/LearnLingo/static/js/987.368a53fa.chunk.js",
     "static/media/block_result.png": "/LearnLingo/static/media/block_result.6175a1ee360f9759f8ae.png",
     "static/media/roboto-v30-latin-500.woff2": "/LearnLingo/static/media/roboto-v30-latin-500.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-v30-latin-700.woff2": "/LearnLingo/static/media/roboto-v30-latin-700.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-v30-latin-regular.woff2": "/LearnLingo/static/media/roboto-v30-latin-regular.b009a76ad6afe4ebd301.woff2",
-    "static/media/icons.svg": "/LearnLingo/static/media/icons.e19dad15aef9204d4440d71903c80a91.svg",
+    "static/media/icons.svg": "/LearnLingo/static/media/icons.b43351b229c3c52c2739daced374e2f0.svg",
     "index.html": "/LearnLingo/index.html",
-    "main.94511bbe.css.map": "/LearnLingo/static/css/main.94511bbe.css.map",
-    "main.1216ff13.js.map": "/LearnLingo/static/js/main.1216ff13.js.map",
-    "709.3dce8342.chunk.js.map": "/LearnLingo/static/js/709.3dce8342.chunk.js.map",
-    "150.7e38ec9c.chunk.js.map": "/LearnLingo/static/js/150.7e38ec9c.chunk.js.map",
-    "987.d446b425.chunk.js.map": "/LearnLingo/static/js/987.d446b425.chunk.js.map"
+    "main.e056c1c3.css.map": "/LearnLingo/static/css/main.e056c1c3.css.map",
+    "main.69e42a30.js.map": "/LearnLingo/static/js/main.69e42a30.js.map",
+    "398.e6b16437.chunk.js.map": "/LearnLingo/static/js/398.e6b16437.chunk.js.map",
+    "150.0c771ae0.chunk.js.map": "/LearnLingo/static/js/150.0c771ae0.chunk.js.map",
+    "987.368a53fa.chunk.js.map": "/LearnLingo/static/js/987.368a53fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.94511bbe.css",
-    "static/js/main.1216ff13.js"
+    "static/css/main.e056c1c3.css",
+    "static/js/main.69e42a30.js"
   ]
 }
