@@ -62,15 +62,14 @@ export const plugins = [
     addComponents({
       '.teachers-container': {
         width: '100%',
-        paddingLeft: '10px',
-        paddingRight: '10px',
+        minHeight: '100vh',
+        padding: '24px 10px 16px',
+        backgroundColor: '#f8f8f8',
         '@screen md': {
-          paddingLeft: '32px',
-          paddingRight: '32px',
+          padding: '44px 32px 16px',
         },
         '@screen lg': {
-          paddingLeft: '128px',
-          paddingRight: '128px',
+          padding: '44px 128px 16px',
         },
       },
       '.radio-input': {

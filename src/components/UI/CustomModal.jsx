@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const customStyles = {
+const defaultStyles = {
   overlay: {
     backgroundColor: 'rgba(25, 26, 21, 0.6)',
   },
@@ -19,12 +19,30 @@ const customStyles = {
   },
 };
 
-export const CustomModal = ({ children, isOpen, onClose }) => {
+const secondaryStyles = {
+  overlay: {
+    backgroundColor: 'rgba(25, 26, 21, 0.6)',
+  },
+  content: {
+    top: 0,
+    right: 0,
+    left: 'auto',
+    bottom: 'auto',
+    border: 'none',
+    borderRadius: '12px',
+    padding: 0,
+  },
+};
+
+export const CustomModal = ({ children, isOpen, onClose, styleVariant }) => {
+  const selectedStyles =
+    styleVariant === 'default' ? defaultStyles : secondaryStyles;
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      style={customStyles}
+      style={selectedStyles}
       preventScroll={true}
     >
       {children}

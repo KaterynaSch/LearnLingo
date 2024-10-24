@@ -26,7 +26,6 @@ export const BookingModal = ({ onClose, avatar_url, name }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
-  //   const [setError] = useState(null);
 
   const onSubmit = ({ fullName, email, phone, reason }) => {
     console.log(fullName, email, phone, reason);

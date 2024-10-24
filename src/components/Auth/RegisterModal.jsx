@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, db } from 'firebaseConfig';
+import { set, ref } from 'firebase/database';
+
 import sprite from '../../images/icons.svg';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useState } from 'react';
 import { Button } from 'components/UI/Button';
-import { auth } from 'firebaseConfig';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,22 +32,36 @@ export const RegisterModal = ({ onClose }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
 
-  const [setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = ({ email, password }) => {
-    console.log(email, password);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(user => {
-        console.log(user);
-      })
-      .catch(error => {
-        setError(error.message);
-      });
-    onClose();
+  const toggleShowPassword = () => {
+    setShowPassword(prevState => !prevState);
   };
 
-  const handleShowPassword = () => {
-    console.log('password showed');
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: name,
+      });
+
+      await set(ref(db, 'users/' + user.uid), {
+        name: name,
+        email: email,
+        favorites: [],
+      });
+
+      console.log('User created:', user);
+    } catch (error) {
+      toast.error('Error create an account');
+    }
+    onClose();
   };
 
   return (
@@ -71,6 +88,7 @@ export const RegisterModal = ({ onClose }) => {
       >
         <div className="relative ">
           <input
+            type="text"
             {...register('name')}
             placeholder="Name"
             className="w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
@@ -83,6 +101,7 @@ export const RegisterModal = ({ onClose }) => {
         </div>
         <div className="relative ">
           <input
+            type="text"
             {...register('email')}
             placeholder="Email"
             className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
@@ -95,6 +114,7 @@ export const RegisterModal = ({ onClose }) => {
         </div>
         <div className="relative">
           <input
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
             className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
@@ -107,10 +127,12 @@ export const RegisterModal = ({ onClose }) => {
           <button
             type="button"
             className="absolute flex justify-center items-center top-4 right-[18px]  "
-            onClick={handleShowPassword}
+            onClick={toggleShowPassword}
           >
             <svg className="stroke-text fill-transparent size-[22px]">
-              <use xlinkHref={`${sprite}#icon_eye_off`} />
+              <use
+                xlinkHref={`${sprite}#icon_${showPassword ? 'eye' : 'eye_off'}`}
+              />
             </svg>
           </button>
         </div>

@@ -1,10 +1,12 @@
 import { lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
+import PrivateRoute from './PrivateRoute';
 
 const Home = lazy(() => import('../pages/HomePage'));
 const Teachers = lazy(() => import('../pages/TeachersPage'));
 const Favorites = lazy(() => import('../pages/FavoritesPage'));
+const NotFound = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
   return (
@@ -12,8 +14,15 @@ export const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/teachers" element={<Teachers />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<Navigate to={'/'} />} />
+        <Route
+          path="/favorites"
+          element={
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

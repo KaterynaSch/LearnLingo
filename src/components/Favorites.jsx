@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+import { auth } from 'firebaseConfig';
 import { fetchFavorites, fetchTeacherById, toggleFavorite } from './api';
 import { TeachersList } from './TeachersList';
-import { auth } from 'firebaseConfig';
 
 export const Favorites = () => {
   const [favoriteTeacherIds, setFavoriteTeacherIds] = useState([]);
@@ -18,8 +21,7 @@ export const Favorites = () => {
         );
         setFavoriteTeacherIds(newIds);
       } catch (error) {
-        console.error('Error fetching favorites:', error);
-        throw error;
+        toast.error('Error fetching favorite teachers');
       }
     };
     getFavorites();
@@ -45,24 +47,35 @@ export const Favorites = () => {
   }, [favoriteTeacherIds]);
 
   const handleRemoveFromFavorites = async teacherId => {
-    if (!user) return;
+    if (!user) {
+      toast.error('Please, sign in for remove teachters from favorites');
+      return;
+    }
 
     try {
       await toggleFavorite(user.uid, teacherId, true);
       setFavoriteTeacherIds(prev => prev.filter(id => id !== teacherId));
     } catch (error) {
-      console.error('Error removing favorite:', error);
-      throw error('Error removing favorite:', error);
+      toast.error('Error removing favorite');
     }
   };
 
   return (
-    <div className=" pt-11 pb-4  bg-grayBGN teachers-container">
-      <TeachersList
-        teachers={favoriteTeachers}
-        favorites={favoriteTeacherIds}
-        handleFavorite={handleRemoveFromFavorites}
-      />
+    <div className=" teachers-container">
+      {favoriteTeachers.length !== 0 ? (
+        <TeachersList
+          teachers={favoriteTeachers}
+          favorites={favoriteTeacherIds}
+          handleFavorite={handleRemoveFromFavorites}
+        />
+      ) : (
+        <p className="mb-5 md:mb-11 text-base md:text-lg text-center">
+          Sorry, there are no favorite teachers yet. You can add some from the{' '}
+          <Link to="/teachers" className="text-accent font-semibold">
+            Teachers page
+          </Link>
+        </p>
+      )}
     </div>
   );
 };

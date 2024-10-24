@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button } from 'components/UI/Button';
 import { auth } from 'firebaseConfig';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,21 +26,21 @@ export const SignInModal = ({ onClose }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
+  const [showPassword, setShowPassword] = useState(false);
 
-  const [setError] = useState(null);
+  const toggleShowPassword = () => {
+    setShowPassword(prevState => !prevState);
+  };
+
   const onSubmit = async ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(user => {
         console.log(user);
       })
-      .catch(error => {
-        setError(error.message);
+      .catch(() => {
+        toast.error('Error sign in');
       });
     onClose();
-  };
-
-  const handleShowPassword = () => {
-    console.log('password showed');
   };
 
   return (
@@ -66,6 +67,7 @@ export const SignInModal = ({ onClose }) => {
       >
         <div className="relative">
           <input
+            type="text"
             {...register('email')}
             placeholder="Email"
             className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
@@ -78,6 +80,7 @@ export const SignInModal = ({ onClose }) => {
         </div>
         <div className="relative">
           <input
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
             className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
@@ -90,10 +93,12 @@ export const SignInModal = ({ onClose }) => {
           <button
             type="button"
             className="absolute flex justify-center items-center top-4 right-[18px]  "
-            onClick={handleShowPassword}
+            onClick={toggleShowPassword}
           >
             <svg className="stroke-text fill-transparent size-[22px]">
-              <use xlinkHref={`${sprite}#icon_eye_off`} />
+              <use
+                xlinkHref={`${sprite}#icon_${showPassword ? 'eye' : 'eye_off'}`}
+              />
             </svg>
           </button>
         </div>

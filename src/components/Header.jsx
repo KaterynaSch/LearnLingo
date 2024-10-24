@@ -1,26 +1,10 @@
 import { useState } from 'react';
-import Modal from 'react-modal';
 import { Authorization } from './Auth/Authorization';
 import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 import Navigation from './Navigation';
 import sprite from '../images/icons.svg';
-
-Modal.setAppElement('#root');
-const customStyles = {
-  overlay: {
-    backgroundColor: 'rgba(25, 26, 21, 0.6)',
-  },
-  content: {
-    top: 0,
-    right: 0,
-    left: 'auto',
-    bottom: 'auto',
-    border: 'none',
-    borderRadius: '12px',
-    padding: 0,
-  },
-};
+import { CustomModal } from './UI/CustomModal';
 
 export const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,13 +31,13 @@ export const Header = () => {
         </svg>
       </button>
       {isModalOpen && (
-        <Modal
+        <CustomModal
           isOpen={isModalOpen}
-          onRequestClose={handleCloseModal}
-          style={customStyles}
+          onClose={handleCloseModal}
+          styleVatiant="secondaryStyles"
         >
           <MobileMenu onClose={handleCloseModal} />
-        </Modal>
+        </CustomModal>
       )}
     </header>
   );

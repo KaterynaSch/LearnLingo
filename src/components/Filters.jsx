@@ -4,9 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 
 export const Filters = () => {
   const [params, setParams] = useSearchParams();
+
+  const maxPrice = Math.max(...prices.map(price => price.value));
+
   const language = params.get('language') ?? 'all_languages';
   const level = params.get('level') ?? 'a1_beginner';
-  const price = params.get('price') ?? '';
+  const price = params.get('price') ?? String(maxPrice);
 
   const handleChange = (e, filterName) => {
     params.set(filterName, e.target.value);

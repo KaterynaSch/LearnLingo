@@ -27,7 +27,7 @@ export default function Navigation({ onClose }) {
   }, []);
 
   return (
-    <nav className=" flex lg:items-center lg:justify-center">
+    <nav className="flex lg:items-center lg:justify-center">
       <ul className="items-start flex flex-col gap-2 lg:flex-row  lg:items-center justify-center md:gap-4 lg:gap-[28px]">
         <li onClick={onClose}>
           <StyledLink to="/">Home</StyledLink>

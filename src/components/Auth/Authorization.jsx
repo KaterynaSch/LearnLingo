@@ -6,6 +6,7 @@ import { SignInModal } from './SignInModal';
 import { RegisterModal } from './RegisterModal';
 import { CustomModal } from 'components/UI/CustomModal';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import toast from 'react-hot-toast';
 
 const AuthIcon = () => {
   return (
@@ -54,8 +55,8 @@ export const Authorization = () => {
       .then(() => {
         console.log('user logged out');
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        toast.error('Error logout');
       });
   };
 
@@ -82,7 +83,9 @@ export const Authorization = () => {
       )}
 
       {authUser ? (
-        <p className="hidden lg:block">{authUser.email}</p>
+        <p className="hidden lg:block">
+          Hello, <strong>{authUser.displayName}</strong>
+        </p>
       ) : (
         <button
           type="button"
@@ -93,7 +96,11 @@ export const Authorization = () => {
         </button>
       )}
       {isModalOpen && (
-        <CustomModal isOpen={isModalOpen} onClose={closeModal}>
+        <CustomModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          styleVariant="default"
+        >
           {modalContent}
         </CustomModal>
       )}

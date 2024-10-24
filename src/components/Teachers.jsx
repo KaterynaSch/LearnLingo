@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 import { auth } from 'firebaseConfig';
-import { TeachersList } from './TeachersList';
 import {
   getTeachers,
   getMoreTeachers,
   toggleFavorite,
   fetchFavorites,
 } from './api';
+import { TeachersList } from './TeachersList';
 import { Filters } from './Filters';
-import { useSearchParams } from 'react-router-dom';
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
@@ -18,7 +20,7 @@ export default function Teachers() {
   const [params] = useSearchParams();
   const selectedLanguage = params.get('language') ?? 'all_languages';
   const selectedLlevel = params.get('level') ?? 'a1_beginner';
-  const selectedPrice = params.get('price') ?? '';
+  const selectedPrice = params.get('price') ?? '40 $';
 
   const totalTeachers = 30;
   const hasMore = teachers.length < totalTeachers;
@@ -35,8 +37,7 @@ export default function Teachers() {
           setLastId(newLastId);
         }
       } catch (error) {
-        console.error('Error fetching teachers:', error);
-        throw error('Error fetching teachers:', error);
+        toast.error('Error fetching teachers');
       } finally {
         setIsLoading(false);
       }
@@ -51,8 +52,7 @@ export default function Teachers() {
         );
         setFavorites(newFavorites);
       } catch (error) {
-        console.error('Error fetching favorites:', error);
-        throw error('Error fetching favorites:', error);
+        toast.error('Error fetching favorite teachers');
       }
     };
 
@@ -72,15 +72,16 @@ export default function Teachers() {
         setLastId(newLastId);
       }
     } catch (error) {
-      console.error('Error fetching more teachers:', error);
-      throw error('Error fetching more teachers:', error);
+      toast.error('Error fetching more teachers');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleToggleFavorite = async teacherId => {
-    if (!user) return;
+    if (!user) {
+      return toast.error('Please register or sign in to favorite a teacher');
+    }
     try {
       const isFavorite = favorites.includes(teacherId);
       await toggleFavorite(user.uid, teacherId, isFavorite);
@@ -88,8 +89,7 @@ export default function Teachers() {
         isFavorite ? prev.filter(id => id !== teacherId) : [...prev, teacherId]
       );
     } catch (error) {
-      console.error('Error toggling favorite:', error);
-      throw error('Error toggling favorite:', error);
+      toast.error('Error toggling favorite');
     }
   };
 
@@ -114,13 +114,20 @@ export default function Teachers() {
   );
 
   return (
-    <div className=" pt-11 pb-4  bg-grayBGN teachers-container">
+    <div className=" teachers-container">
       <Filters />
-      <TeachersList
-        teachers={visibleTeachers}
-        favorites={favorites}
-        handleFavorite={handleToggleFavorite}
-      />
+      {visibleTeachers.length !== 0 ? (
+        <TeachersList
+          teachers={visibleTeachers}
+          favorites={favorites}
+          handleFavorite={handleToggleFavorite}
+        />
+      ) : (
+        <p className="mb-5 md:mb-11 text-base md:text-lg text-center">
+          Sorry, no teachers found for your search criteria
+        </p>
+      )}
+
       {teachers.length > 0 && hasMore && (
         <button
           type="button"

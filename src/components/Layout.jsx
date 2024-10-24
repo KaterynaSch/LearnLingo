@@ -5,7 +5,7 @@ import { Loader } from './Loader';
 
 export const Layout = () => {
   return (
-    <div className=" pt-5 w-full h-full my-0 mx-auto">
+    <div className=" pt-5 w-full min-h-screen my-0 mx-auto">
       <Header />
       <main>
         <Suspense fallback={<Loader />}>
