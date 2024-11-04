@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import { auth } from 'firebaseConfig';
 import {
   getTeachers,
   getMoreTeachers,
@@ -11,20 +10,23 @@ import {
 } from './api';
 import { TeachersList } from './TeachersList';
 import { Filters } from './Filters';
+import { Loader } from './Loader';
+import { useAuth } from 'context/AuthContext';
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [lastId, setLastId] = useState(null);
+  const { authUser } = useAuth();
   const [params] = useSearchParams();
+
   const selectedLanguage = params.get('language') ?? 'all_languages';
-  const selectedLlevel = params.get('level') ?? 'a1_beginner';
-  const selectedPrice = params.get('price') ?? '40 $';
+  const selectedLevel = params.get('level') ?? 'a1_beginner';
+  const selectedPrice = params.get('price') ?? '';
 
   const totalTeachers = 30;
   const hasMore = teachers.length < totalTeachers;
-  const user = auth.currentUser;
 
   useEffect(() => {
     const getInitialTeachers = async () => {
@@ -44,9 +46,9 @@ export default function Teachers() {
     };
 
     const getFavorites = async () => {
-      if (!user) return;
+      if (!authUser) return;
       try {
-        const favoritesData = await fetchFavorites(user.uid);
+        const favoritesData = await fetchFavorites(authUser.uid);
         const newFavorites = Object.keys(favoritesData).filter(
           key => favoritesData[key]
         );
@@ -58,7 +60,7 @@ export default function Teachers() {
 
     getInitialTeachers();
     getFavorites();
-  }, [user]);
+  }, [authUser]);
 
   const loadMoreTeachers = async () => {
     if (!teachers.length || !lastId) return;
@@ -79,12 +81,14 @@ export default function Teachers() {
   };
 
   const handleToggleFavorite = async teacherId => {
-    if (!user) {
-      return toast.error('Please register or sign in to favorite a teacher');
+    if (!authUser) {
+      return toast.error(
+        'Please register or sign in to select your favorite teachers'
+      );
     }
     try {
       const isFavorite = favorites.includes(teacherId);
-      await toggleFavorite(user.uid, teacherId, isFavorite);
+      await toggleFavorite(authUser.uid, teacherId, isFavorite);
       setFavorites(prev =>
         isFavorite ? prev.filter(id => id !== teacherId) : [...prev, teacherId]
       );
@@ -103,20 +107,21 @@ export default function Teachers() {
               lang.toLowerCase().replace(/[\s-]+/g, '_') === selectedLanguage
           );
         const hasLevel = levels.some(
-          level =>
-            level.toLowerCase().replace(/[\s-]+/g, '_') === selectedLlevel
+          level => level.toLowerCase().replace(/[\s-]+/g, '_') === selectedLevel
         );
         const hasPrice =
           selectedPrice === '' || price_per_hour <= selectedPrice;
         return hasLanguage && hasLevel && hasPrice;
       }),
-    [selectedLanguage, selectedLlevel, selectedPrice, teachers]
+    [selectedLanguage, selectedLevel, selectedPrice, teachers]
   );
 
   return (
     <div className=" teachers-container">
       <Filters />
-      {visibleTeachers.length !== 0 ? (
+      {isLoading ? (
+        <Loader />
+      ) : visibleTeachers.length > 0 ? (
         <TeachersList
           teachers={visibleTeachers}
           favorites={favorites}

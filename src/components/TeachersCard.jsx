@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import sprite from '../images/icons.svg';
 import { CustomModal } from './UI/CustomModal';
 import { BookingModal } from './BookingModal';
@@ -151,9 +152,7 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
               <li key={level}>
                 <button
                   type="button"
-                  className={` rounded-[35px] border border-text/[0.2] px-3 py-2 ${
-                    idx === 0 ? 'bg-accent' : ''
-                  }`}
+                  className=" rounded-[35px] border border-text/[0.2] px-3 py-2 "
                 >
                   {level}
                 </button>
@@ -173,7 +172,11 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
         )}
       </div>
       {isModalOpen && (
-        <CustomModal isOpen={isModalOpen} onClose={closeModal}>
+        <CustomModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          styleVariant="default"
+        >
           <BookingModal
             avatar_url={avatar_url}
             name={name + ' ' + surname}

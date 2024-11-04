@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, db } from 'firebaseConfig';
 import { set, ref } from 'firebase/database';
+import toast from 'react-hot-toast';
 
+import { auth, db } from 'firebaseConfig';
 import sprite from '../../images/icons.svg';
 import { Button } from 'components/UI/Button';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -57,7 +57,7 @@ export const RegisterModal = ({ onClose }) => {
         favorites: [],
       });
 
-      console.log('User created:', user);
+      toast.success('You have successfully registered');
     } catch (error) {
       toast.error('Error create an account');
     }
@@ -91,7 +91,7 @@ export const RegisterModal = ({ onClose }) => {
             type="text"
             {...register('name')}
             placeholder="Name"
-            className="w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+            className="w-full py-4 px-[18px] placeholder:text-text border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
           {errors && (
             <p className=" absolute text-accent text-xs  -bottom-0 left-2">
@@ -104,7 +104,7 @@ export const RegisterModal = ({ onClose }) => {
             type="text"
             {...register('email')}
             placeholder="Email"
-            className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+            className=" w-full py-4 px-[18px] placeholder:text-text border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
           {errors && (
             <p className=" absolute text-accent text-xs  -bottom-0 left-2">
@@ -117,7 +117,7 @@ export const RegisterModal = ({ onClose }) => {
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
-            className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+            className="w-full py-4 px-[18px] placeholder:text-text border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
           {errors && (
             <p className=" absolute text-accent text-xs  -bottom-0 left-2">

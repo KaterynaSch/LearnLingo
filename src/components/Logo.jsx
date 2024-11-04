@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import sprite from '../images/icons.svg';
 
+import sprite from '../images/icons.svg';
 export const Logo = () => {
   return (
     <Link to="/">

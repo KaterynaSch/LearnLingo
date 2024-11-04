@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import sprite from '../../images/icons.svg';
-import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Button } from 'components/UI/Button';
-import { auth } from 'firebaseConfig';
 import toast from 'react-hot-toast';
+
+import sprite from '../../images/icons.svg';
+import { auth } from 'firebaseConfig';
+import { Button } from 'components/UI/Button';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,6 +27,7 @@ export const SignInModal = ({ onClose }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -34,11 +36,11 @@ export const SignInModal = ({ onClose }) => {
 
   const onSubmit = async ({ email, password }) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(user => {
-        console.log(user);
+      .then(() => {
+        toast.success('You have successfully logged in');
       })
       .catch(() => {
-        toast.error('Error sign in');
+        toast.error('Error logged in');
       });
     onClose();
   };
@@ -70,7 +72,7 @@ export const SignInModal = ({ onClose }) => {
             type="text"
             {...register('email')}
             placeholder="Email"
-            className=" w-full py-4 px-[18px] border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
+            className=" w-full py-4 px-[18px] placeholder:text-text border-[1px] border-text/[0.1] rounded-xl mb-[18px]"
           />
           {errors && (
             <p className=" absolute text-accent text-xs  -bottom-0 left-2">
@@ -83,7 +85,7 @@ export const SignInModal = ({ onClose }) => {
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
-            className="w-full py-4 px-[18px]  border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
+            className="w-full py-4 px-[18px] placeholder:text-text border-[1px]  border-text/[0.1] focus:border-accent focus:outline-none rounded-xl mb-[18px]"
           />
           {errors && (
             <p className="absolute text-accent text-xs  -bottom-0 left-2">

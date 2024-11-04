@@ -1,6 +1,7 @@
-import { languages, levels, prices } from 'data/selectOptions';
-import { Select } from './UI/Select';
 import { useSearchParams } from 'react-router-dom';
+
+import { Select } from './UI/Select';
+import { languages, levels, prices } from 'data/selectOptions';
 
 export const Filters = () => {
   const [params, setParams] = useSearchParams();
@@ -20,7 +21,7 @@ export const Filters = () => {
     <ul className="flex flex-col gap-2 md:flex-row md:gap-3 lg:gap-5 mb-5 lg:mb-11">
       <li className="md:w-[220px]">
         <Select
-          label={'Languages'}
+          label="Languages"
           name="Languages"
           options={languages}
           value={language}
@@ -29,7 +30,7 @@ export const Filters = () => {
       </li>
       <li className="md:w-[200px]">
         <Select
-          label={'Level of knowledge'}
+          label="Level of knowledge"
           name="Levels"
           options={levels}
           value={level}
@@ -38,7 +39,7 @@ export const Filters = () => {
       </li>
       <li className="md:w-[124px]">
         <Select
-          label={'Prices'}
+          label="Prices"
           name="Prices"
           options={prices}
           value={price}

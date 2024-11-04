@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import sprite from '../../images/icons.svg';
-import { auth } from '../../firebaseConfig';
 import { SignInModal } from './SignInModal';
 import { RegisterModal } from './RegisterModal';
 import { CustomModal } from 'components/UI/CustomModal';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import toast from 'react-hot-toast';
+import { useAuth } from 'context/AuthContext';
 
 const AuthIcon = () => {
   return (
@@ -17,13 +15,9 @@ const AuthIcon = () => {
 };
 
 export const Authorization = () => {
-  const [authUser, setAuthUser] = useState(null);
+  const { authUser, logOut } = useAuth();
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const openSignInModal = () => {
     if (!isModalOpen) {
@@ -39,26 +33,7 @@ export const Authorization = () => {
     }
   };
 
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, user => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
-    });
-    return () => listen();
-  }, []);
-
-  const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log('user logged out');
-      })
-      .catch(() => {
-        toast.error('Error logout');
-      });
-  };
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="flex flex-col mt-auto gap-4 items-start md:gap-4 lg:flex-row  lg:gap-4 lg:justify-center lg:items-center">
@@ -75,7 +50,7 @@ export const Authorization = () => {
         <button
           type="button"
           className="flex flex-row gap-1 md:gap-2 justify-center items-center"
-          onClick={handleLogOut}
+          onClick={logOut}
         >
           <AuthIcon />
           <span className=" text-base/[1.2] font-bold ">Log out</span>

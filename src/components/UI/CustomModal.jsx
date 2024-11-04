@@ -43,7 +43,8 @@ export const CustomModal = ({ children, isOpen, onClose, styleVariant }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       style={selectedStyles}
-      preventScroll={true}
+      preventScroll={false}
+      shouldFocusAfterRender={true}
     >
       {children}
     </Modal>
