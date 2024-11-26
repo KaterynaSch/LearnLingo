@@ -49,6 +49,12 @@
             <path fill="#12141733" style="fill:var(--color1, #fff)"
                 d="M16 8a8 8 0 1 1 0 16 8 8 0 0 1 0-16z" />
         </symbol>
+        <symbol id="icon_online" viewBox="0 0 32 32">
+            <path fill="#fff" style="fill:var(--color1, #fff)"
+                d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0s16 7.163 16 16z" />
+            <path fill="#38cd3e" style="fill:var(--color2, #38cd3e)"
+                d="M26.667 16c0 5.891-4.776 10.667-10.667 10.667S5.333 21.891 5.333 16 10.109 5.333 16 5.333 26.667 10.109 26.667 16z" />
+        </symbol>
         <symbol id="burger" viewBox="0 0 32 32">
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
                 stroke-width="2" d="M28 13.333h-24">
