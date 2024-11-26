@@ -26,6 +26,36 @@
   src: url('./fonts/roboto-v30-latin-700.woff2') format('woff2');
 }
 
+:root {
+  --accent-color: #9fbaae;
+  --background-color: #cbded3;
+}
+
+.theme-green {
+  --accent-color: #9fbaae;
+  --background-color: #cbded3;
+}
+
+.theme-orange {
+  --accent-color: #f4c550;
+  --background-color: #fbe9ba;
+}
+
+.theme-blue {
+  --accent-color: #9fb7ce;
+  --background-color: #bfd6ea;
+}
+
+.theme-pink {
+  --accent-color: #e0a39a;
+  --background-color: #f2c0bd;
+}
+
+.theme-red {
+  --accent-color: #f0aa8d;
+  --background-color: #f3c8ba;
+}
+
 body.ReactModal__Body--open {
   overflow: hidden;
 }

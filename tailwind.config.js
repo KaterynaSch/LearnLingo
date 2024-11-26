@@ -20,39 +20,12 @@ export const theme = {
     },
     colors: {
       text: '#121417',
-      accent: '#F4C550',
-      accentLight: '#FFDC86',
-      background: '#FBE9BA',
       gray: '#121417B2',
       lightGray: '#8A8A89',
       grayBGN: '#F8F8F8',
       green: '#38CD3E',
-
-      theme1: {
-        //yellow
-        accent: '#F4C550',
-        background: '#FBE9BA',
-      },
-      theme2: {
-        //green
-        accent: '#9FBAAE',
-        background: '#CBDED3',
-      },
-      theme3: {
-        //blue
-        accent: '#9FB7CE',
-        background: '#BFD6EA',
-      },
-      theme4: {
-        //pink
-        accent: '#E0A39A',
-        background: '#F2C0BD',
-      },
-      theme5: {
-        //red
-        accent: '#F0AA8D',
-        background: '#F3C8BA',
-      },
+      accent: 'var(--accent-color)',
+      background: 'var(--background-color)',
     },
   },
 };

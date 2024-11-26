@@ -1,7 +1,7 @@
-export const Button = ({ text, className }) => {
+export const CustomButton = ({ text, className }) => {
   return (
     <button
-      className={`w-full text-center text-lg font-bold bg-accent hover:bg-accentLight py-4 rounded-xl ${className}`}
+      className={`w-full text-center text-lg font-bold bg-accent hover:bg-background py-4 rounded-xl ${className}`}
       type="submit"
     >
       {text}

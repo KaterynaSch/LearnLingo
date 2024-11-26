@@ -3,7 +3,7 @@ import { useState } from 'react';
 import sprite from '../../images/icons.svg';
 import { SignInModal } from './SignInModal';
 import { RegisterModal } from './RegisterModal';
-import { CustomModal } from 'components/UI/CustomModal';
+import { CustomModal } from 'components/UI/Modal';
 import { useAuth } from 'context/AuthContext';
 
 const AuthIcon = () => {

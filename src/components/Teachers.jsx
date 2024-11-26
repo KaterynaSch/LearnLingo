@@ -136,7 +136,7 @@ export default function Teachers() {
       {teachers.length > 0 && hasMore && (
         <button
           type="button"
-          className="block text-center w-[184px] text-lg font-bold text-text bg-accent hover:bg-accentLight py-2 md:py-4 rounded-xl "
+          className="block text-center w-[184px] text-lg font-bold text-text bg-accent hover:bg-background py-2 md:py-4 rounded-xl "
           onClick={loadMoreTeachers}
           disabled={isLoading}
         >

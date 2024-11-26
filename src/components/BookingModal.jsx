@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
 
 import sprite from '../images/icons.svg';
-import { Button } from './UI/Button';
+import { CustomButton } from './UI/Button';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -164,7 +164,7 @@ export const BookingModal = ({ onClose, avatar_url, name }) => {
             )}
           </div>
         </div>
-        <Button text="Book" className={'mt-6 md:mt-[32px]'} />
+        <CustomButton text="Book" className={'mt-6 md:mt-[32px]'} />
       </form>
     </div>
   );

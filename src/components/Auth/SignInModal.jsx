@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 import sprite from '../../images/icons.svg';
 import { auth } from 'firebaseConfig';
-import { Button } from 'components/UI/Button';
+import { CustomButton } from 'components/UI/Button';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -99,12 +99,12 @@ export const SignInModal = ({ onClose }) => {
           >
             <svg className="stroke-text fill-transparent size-[22px]">
               <use
-                xlinkHref={`${sprite}#icon_${showPassword ? 'eye' : 'eye_off'}`}
+                xlinkHref={`${sprite}#icon_${showPassword ? 'eye_off' : 'eye'}`}
               />
             </svg>
           </button>
         </div>
-        <Button text="Log In" className={'mt-[10px] md:mt-[32px]'} />
+        <CustomButton text="Log In" className={'mt-[10px] md:mt-[32px]'} />
       </form>
     </div>
   );

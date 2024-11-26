@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import sprite from '../images/icons.svg';
-import { CustomModal } from './UI/CustomModal';
+import { CustomModal } from './UI/Modal';
 import { BookingModal } from './BookingModal';
+import { useSearchParams } from 'react-router-dom';
 export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
   const {
     id,
@@ -21,6 +22,10 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
   } = teacher;
   const [isExpanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [params] = useSearchParams();
+
+  const selectedLevel = params.get('level')?.toLowerCase();
+  const formatLevel = level => level.toLowerCase().replace(/\s+/g, '_');
 
   const getOption = (options, flag) => {
     return options.map((option, idx) => {
@@ -51,12 +56,15 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
 
   return (
     <div className="relative p-2 md:p-3 lg:p-6 flex flex-col items-center lg:items-start lg:flex-row gap-3 md:gap-6 lg:gap-12 bg-white rounded-3xl text-text font-medium">
-      <div className="min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center ">
+      <div className=" relative min-w-[120px] h-[120px] rounded-full border-[3px] border-background flex justify-center items-center ">
         <img
           src={avatar_url}
           alt="avatar"
           className="size-[96px] rounded-full"
         />
+        <svg className="absolute top-[18px] right-[18px] size-3">
+          <use xlinkHref={`${sprite}#icon_online`} />
+        </svg>
       </div>
 
       {/* BLOCKS */}
@@ -68,17 +76,17 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
             <h2 className="text-2xl ">{name + ' ' + surname}</h2>
           </div>
 
-          <ul className="flex flex-row text-sm md:text-base items-center gap-2 flex-wrap lg:gap-4 lg:mr-16">
-            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
+          <ul className="flex flex-row text-sm md:text-base items-center gap-2 flex-wrap  lg:mr-16">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2] after:mx-4">
               <svg className="stroke-black fill-transparent size-4">
                 <use xlinkHref={`${sprite}#icon_book_open`} />
               </svg>
               <p>Lessons online</p>
             </li>
-            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2] after:mx-4">
               <p>Lessons done: {lessons_done}</p>
             </li>
-            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2]">
+            <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2] after:mx-4">
               <svg className="  size-4">
                 <use xlinkHref={`${sprite}#icon_star`} />
               </svg>
@@ -147,12 +155,15 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
         </div>
         {/* Third block */}
         <ul className="flex flex-row flex-wrap gap-2 text-text text-sm md:text-base ">
-          {levels.map((level, idx) => {
+          {levels.map(level => {
+            const isActive = formatLevel(level) === selectedLevel;
             return (
               <li key={level}>
                 <button
                   type="button"
-                  className=" rounded-[35px] border border-text/[0.2] px-3 py-2 "
+                  className={`rounded-[35px] border border-text/[0.2] px-3 py-2 ${
+                    isActive ? 'bg-accent' : 'bg-transparent'
+                  }`}
                 >
                   {level}
                 </button>

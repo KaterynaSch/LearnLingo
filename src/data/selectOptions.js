@@ -26,3 +26,11 @@ export const prices = [
   { label: '30 $', value: 30 },
   { label: '40 $', value: 40 },
 ];
+
+export const themeOptions = [
+  { value: 'green', color: '#9fbaae' },
+  { value: 'orange', color: '#f4c550' },
+  { value: 'blue', color: '#9fb7ce' },
+  { value: 'pink', color: '#e0a39a' },
+  { value: 'red', color: '#F0AA8D' },
+];

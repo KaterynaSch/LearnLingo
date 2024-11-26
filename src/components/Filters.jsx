@@ -1,49 +1,49 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { Select } from './UI/Select';
 import { languages, levels, prices } from 'data/selectOptions';
+import { CustomSelect } from './UI/Select';
 
 export const Filters = () => {
   const [params, setParams] = useSearchParams();
 
-  const maxPrice = Math.max(...prices.map(price => price.value));
+  const language = params.get('language') || 'all_languages';
+  const level = params.get('level') || 'a1_beginner';
+  const price =
+    parseInt(params.get('price'), 10) || Math.max(...prices.map(p => p.value));
 
-  const language = params.get('language') ?? 'all_languages';
-  const level = params.get('level') ?? 'a1_beginner';
-  const price = params.get('price') ?? String(maxPrice);
-
-  const handleChange = (e, filterName) => {
-    params.set(filterName, e.target.value);
-    setParams(params);
+  const handleChange = (selectedOption, filterName) => {
+    const newParams = new URLSearchParams(params);
+    newParams.set(filterName, selectedOption.value);
+    setParams(newParams);
   };
 
   return (
     <ul className="flex flex-col gap-2 md:flex-row md:gap-3 lg:gap-5 mb-5 lg:mb-11">
-      <li className="md:w-[220px]">
-        <Select
+      <li>
+        <CustomSelect
           label="Languages"
-          name="Languages"
           options={languages}
-          value={language}
-          onChange={e => handleChange(e, 'language')}
+          inputSize={{ width: '220px' }}
+          value={languages.find(option => option.value === language)}
+          onChange={selectedOption => handleChange(selectedOption, 'language')}
         />
       </li>
-      <li className="md:w-[200px]">
-        <Select
+      <li>
+        <CustomSelect
           label="Level of knowledge"
-          name="Levels"
           options={levels}
-          value={level}
-          onChange={e => handleChange(e, 'level')}
+          inputSize={{ width: '198px' }}
+          value={levels.find(option => option.value === level)}
+          onChange={selectedOption => handleChange(selectedOption, 'level')}
         />
       </li>
-      <li className="md:w-[124px]">
-        <Select
+      <li>
+        <CustomSelect
           label="Prices"
-          name="Prices"
           options={prices}
-          value={price}
-          onChange={e => handleChange(e, 'price')}
+          inputSize={{ width: '124px' }}
+          value={prices.find(option => option.value === price)}
+          onChange={selectedOption => handleChange(selectedOption, 'price')}
         />
       </li>
     </ul>
