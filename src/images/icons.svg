@@ -67,5 +67,10 @@
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4"
                 stroke-width="2" d="M28 24h-24"></path>
         </symbol>
+        <symbol id="icon_avatar" viewBox="0 0 32 32">
+            <path d="M8 0h16a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H8a8 8 0 0 1-8-8V8a8 8 0 0 1 8-8z" />
+            <path
+                d="M16 9.6a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4zm0 8c3.536 0 6.4 1.432 6.4 3.2v1.6H9.6v-1.6c0-1.768 2.864-3.2 6.4-3.2z" />
+        </symbol>
     </defs>
 </svg>

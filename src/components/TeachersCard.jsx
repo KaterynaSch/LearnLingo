@@ -130,14 +130,21 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
                 {reviews.map(({ reviewer_name, reviewer_rating, comment }) => {
                   return (
                     <li key={reviewer_name}>
-                      <p className="text-lightGray">{reviewer_name}</p>{' '}
-                      <div className="flex flex-row gap-2">
-                        <svg className="size-4">
-                          <use xlinkHref={`${sprite}#icon_star`} />
+                      <div className="flex flex-row items-center gap-3 mb-4">
+                        <svg className="stroke-white fill-accent size-[44px]">
+                          <use xlinkHref={`${sprite}#icon_avatar`} />
                         </svg>
-                        <p>{reviewer_rating}</p>
+                        <div>
+                          <p className="text-lightGray">{reviewer_name}</p>{' '}
+                          <div className="flex flex-row items-center gap-2">
+                            <svg className="size-4">
+                              <use xlinkHref={`${sprite}#icon_star`} />
+                            </svg>
+                            <p>{reviewer_rating}</p>
+                          </div>
+                        </div>
                       </div>
-                      <p>{comment}</p>
+                      <p>{comment}</p>{' '}
                     </li>
                   );
                 })}

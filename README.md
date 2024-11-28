@@ -1,112 +1,62 @@
-# React homework template
+# LearnLingo
 
-Цей проект був створений за допомогою
-[Create React App](https://github.com/facebook/create-react-app). Для знайомства
-і налаштування додаткових можливостей
-[звернися до документації](https://facebook.github.io/create-react-app/docs/getting-started).
+This site was created for a company that offers language teaching services, with
+the possibility of authorization (registration, login, obtaining data about the
+current user, logout) and adding teachers to a favorites list.
 
-## Створення репозиторію за шаблоном
+[Layout of the application](https://www.figma.com/file/dewf5jVviSTuWMMyU3d8Mc/%D0%9F%D0%B5%D1%82-%D0%BF%D1%80%D0%BE%D1%94%D0%BA%D1%82-%D0%B4%D0%BB%D1%8F-%D0%9A%D0%A6?type=design&node-id=0-1&mode=design&t=jCmjSs9PeOjObYSc-0)
+[Terms of reference](https://docs.google.com/document/d/1ZB_MFgnnJj7t7OXtv5hESSwY6xRgVoACZKzgZczWc3Y/edit?tab=t.0)
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення репозиторію
-свого проєкта. Для цього натисни на кнопку `«Use this template»` і вибери опцію
-`«Create a new repository»`, як показано на зображенні.
+## Features
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+- user authorization capability
+- main page with a general description of the services provided by the company
+- gallery with detailed information about teachers, including the option to book
+  a trial lesson
+- filtering options for teachers based on the language to learn, proficiency
+  level, and price per hour
+- a favorites page: available only to authorized users, showing teachers the
+  user has added to their favorites
+- a wide selection of application color themes
 
-На наступному кроці відкриється сторінка створення нового репозиторію. Заповни поле
-його імені, переконайся що репозиторій публічний, після чого натисни кнопку
-`«Create repository from template»`.
+## Technologies
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+This project uses the following technologies and libraries: HTML, CSS, REACT,
+react-dom, react-router-dom, tailwindcss, react-select, react-modal,
+react-hook-form, yup, react-hot-toast.
 
-Після того як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як
-показано на зображенні.
+## Backend
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+The project uses Firebase as the backend:
 
-Проскроливши сторінку до самого кінця, у секції `«Workflow permissions»` вибери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це
-необхідно для автоматизації процесу деплою проєкту.
+- Firebase Realtime Database for storing collections of teachers and user data.
+- Firebase Authentication for user registration, login, retrieving user data,
+  and logout.
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+[https://firebase.google.com/](https://firebase.google.com/)
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів і папок
-репозиторію-шаблону. Далі працюй із ним як із будь-яким іншим особистим репозиторієм,
-клонуй його собі на комп'ютер, пиши код, роби комміти і відправляй їх на
-GitHub.
+## Preparation for work
 
-## Підготовка до роботи
+1. Make sure the LTS version of Node.js is installed on your computer.
+   [Download and install](https://nodejs.org/en/) it if necessary.
+2. Set basic dependence on the project with the `npm install` command.
+3. Start the authoring mode by executing the `npm start` command.
+4. Go to the browser at [http ://localhost: 3000](http://localhost:3000). This
+   page will automatically reload when you save your changes to the project
+   files.
 
-1. Переконайся що на комп'ютері встановлено LTS-версія Node.js.
-   [Завантаж і встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проєкту командою `npm install`.
-3. Запусти режим розробки, виконавши команду `npm start`.
-4. Перейди в браузері за адресою [http://localhost:3000](http://localhost:3000).
-   Ця сторінка буде автоматично перезавантажуватися після збереження змін у файлах проєкту.
+## Expand
 
-## Деплой
-
-Продакшн версія проєкту буде автоматично проходити лінтинг, збиратися і
-деплоїтися на GitHub Pages, у гілку `gh-pages`, щоразу, коли оновлюється
-гілка `main`. Наприклад, після прямого пушу або прийнятого пул-реквесту. Для цього
-необхідно у файлі `package.json` відредагувати поле `homepage`, замінивши
-`your_username` і `your_repo_name` на свої, і відправити зміни на GitHub.
+The production version of the project will automatically be linted, assembled
+and deployed on GitHub Pages, in the `gh-pages` branch, whenever the `main`
+branch is updated. For example, after direct push or accepted pool-request. To
+do this, in the `package.json` edit the `homepage` field, replacing
+`your_username`and `your_repo_name` on your own, and send the changes to GitHub.
 
 ```json
 "homepage": "https://your_username.github.io/your_repo_name/"
 ```
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) і
-виставити роздачу продакшн-версії файлів із папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплоя
-
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
-
-- **Жовтий колір** - виконується збірка і деплой проєкту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, сборки або деплою сталася помилка.
-
-Детальнішу інформацію про статус можна подивитися, клікнувши на іконку, і
-у вікні, що випадає, перейти за посиланням `Details`.
-
-![Deployment status](./assets/deploy-status.png)
-
-### Жива сторінка
-
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися
-за адресою, вказаною у відредагованій властивості `homepage`. Наприклад, ось
-посилання на живу версію для цього репозиторію
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Якщо відкривається порожня сторінка, переконайся, що у вкладці `Console` немає помилок
-пов'язаних із неправильними шляхами до CSS і JS файлів проєкту (**404**). Швидше 
-за все у тебе неправильне значення властивості `homepage` у файлі `package.json`.
-
-### Маршрутизація
-
-Якщо додаток використовує бібліотеку `react-router-dom` для маршрутизації,
-необхідно додатково налаштувати компонент `<BrowserRouter>`, передавши у пропе
-`basename` точну назву твого репозиторію. Слеш на початку рядка обов'язковий.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Як це працює
-
-![How it works](./assets/how-it-works.png)
-
-1. Після кожного пушу в гілку `main` GitHub-репозиторія, запускається спеціальний
-   скрипт (GitHub Action) з файла `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується і
-   проходить лінтинг і збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн-версія файлів проєкту
-   відправляється в гілку `gh-pages`. В іншому випадку, в лозі виконання
-   скрипта буде вказано в чому проблема.
+Next, you need to go to the GitHub repository settings (`Settings` > `Pages`)
+and expose the distribution of the production version of files from the`/root`
+folder of the `gh-pages` branch, if it was not done automatically.
