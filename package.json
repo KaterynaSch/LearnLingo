@@ -8,7 +8,6 @@
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.7.7",
     "caniuse-lite": "^1.0.30001642",
     "firebase": "^10.13.2",
     "react": "^18.3.1",
@@ -49,6 +48,8 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.4"
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
   }
 }

@@ -24,6 +24,7 @@ export const Filters = () => {
           label="Languages"
           options={languages}
           inputSize={{ width: '220px' }}
+          inputId="select-language"
           value={languages.find(option => option.value === language)}
           onChange={selectedOption => handleChange(selectedOption, 'language')}
         />
@@ -33,6 +34,7 @@ export const Filters = () => {
           label="Level of knowledge"
           options={levels}
           inputSize={{ width: '198px' }}
+          inputId="select-level"
           value={levels.find(option => option.value === level)}
           onChange={selectedOption => handleChange(selectedOption, 'level')}
         />
@@ -42,6 +44,7 @@ export const Filters = () => {
           label="Prices"
           options={prices}
           inputSize={{ width: '124px' }}
+          inputId="select-price"
           value={prices.find(option => option.value === price)}
           onChange={selectedOption => handleChange(selectedOption, 'price')}
         />

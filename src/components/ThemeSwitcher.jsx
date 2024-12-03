@@ -75,7 +75,9 @@ export const ThemeSwitcher = () => {
   return (
     <div className="flex flex-row gap-1 justify-center items-center">
       <div className="hidden md:block">
-        <label className="text-lightGray ">Theme</label>
+        <label className="text-lightGray " htmlFor="theme-select">
+          Theme
+        </label>
       </div>
       <Select
         options={themeOptions}
@@ -84,6 +86,7 @@ export const ThemeSwitcher = () => {
         onChange={handleChange}
         formatOptionLabel={optionLabel}
         isSearchable={false}
+        inputId="theme-select"
       />
     </div>
   );

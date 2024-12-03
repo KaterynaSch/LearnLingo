@@ -66,16 +66,12 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
           <use xlinkHref={`${sprite}#icon_online`} />
         </svg>
       </div>
-
-      {/* BLOCKS */}
       <div className=" flex flex-col  gap-3 md:gap-6 lg:gap-8  w-full">
-        {/* First block */}
         <div className=" flex flex-col  lg:flex-row justify-between items-center lg:justify-between lg:items-start w-full gap-2">
           <div className="flex flex-col gap-2 ">
             <p className=" text-center lg:text-left text-lightGray">Teacher</p>
             <h2 className="text-2xl ">{name + ' ' + surname}</h2>
           </div>
-
           <ul className="flex flex-row text-sm md:text-base items-center gap-2 flex-wrap  lg:mr-16">
             <li className="inline-flex flex-row gap-2 items-center after:content-[''] after:h-[16px] after:w-[1px] after:bg-text/[0.2] after:mx-4">
               <svg className="stroke-black fill-transparent size-4">
@@ -99,7 +95,6 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
               </p>
             </li>
           </ul>
-
           <button
             type="button"
             className="absolute flex justify-center items-center  top-2 right-2 md:top-3 md:right-3 lg:top-6 lg:right-6"
@@ -116,7 +111,6 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
             </svg>
           </button>
         </div>
-        {/* Second block */}
         <div className="flex flex-col items-start gap-2 text-lightGray ">
           <p>Speaks: {getOption(languages, 'languages')}</p>
           <p>
@@ -151,7 +145,6 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
               </ul>
             </div>
           )}
-
           <button
             type="button"
             className="underline mt-2 text-text"
@@ -160,7 +153,6 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
             {isExpanded ? 'Read less' : 'Read more'}
           </button>
         </div>
-        {/* Third block */}
         <ul className="flex flex-row flex-wrap gap-2 text-text text-sm md:text-base ">
           {levels.map(level => {
             const isActive = formatLevel(level) === selectedLevel;
@@ -178,7 +170,6 @@ export const TeachersCard = ({ teacher, isFavorite, handleFavorite }) => {
             );
           })}
         </ul>
-        {/* Fourth block */}
         {isExpanded && (
           <button
             type="button"

@@ -71,19 +71,23 @@ export const CustomSelect = ({
   value,
   label,
   inputSize,
+  inputId,
   onChange,
 }) => {
   return (
     <>
       {label && (
         <div className="mb-2">
-          <label className="text-lightGray ">{label}</label>
+          <label className="text-lightGray " htmlFor={inputId}>
+            {label}
+          </label>
         </div>
       )}
       <Select
         styles={customStyles(inputSize)}
         options={options}
         value={value}
+        inputId={inputId}
         onChange={onChange}
       />
     </>

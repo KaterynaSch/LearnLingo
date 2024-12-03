@@ -7,6 +7,7 @@ export const MobileMenu = ({ onClose }) => {
       <button
         type="button"
         className="absolute flex justify-center items-center top-4 right-4 "
+        aria-label="Close"
         onClick={onClose}
       >
         <svg className="stroke-text fill-transparent size-5">
